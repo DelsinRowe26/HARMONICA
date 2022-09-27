@@ -65,7 +65,9 @@
     <Compile Include="LogClass.cs" />
     <Compile Include="mac.cs" />
     <Compile Include="MessageBoxAct.xaml.cs" />
+    <Compile Include="PitchShifter.cs" />
     <Compile Include="PitchShifterPitch.cs" />
+    <Compile Include="SampleDSP.cs" />
     <Compile Include="SampleDSPPitch.cs" />
     <Compile Include="SimpleMixer.cs" />
     <Compile Include="SoftCl.cs" />
@@ -118,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="32547346-f758-4436-9811-3a4aca09ae1d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="progressbar-backgrnd.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

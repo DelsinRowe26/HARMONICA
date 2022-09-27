@@ -1,15 +1,59 @@
-﻿using System;
+﻿/****************************************************************************
+*
+* NAME: PitchShift.cs
+* VERSION: 1.0
+* HOME URL: http://www.dspdimension.com
+* KNOWN BUGS: none
+*
+* SYNOPSIS: Routine for doing pitch shifting while maintaining
+* duration using the Short Time Fourier Transform.
+*
+* DESCRIPTION: The routine takes a pitchShift factor value which is between 0.5
+* (one octave down) and 2. (one octave up). A value of exactly 1 does not change
+* the pitch. numSampsToProcess tells the routine how many samples in indata[0...
+* numSampsToProcess-1] should be pitch shifted and moved to outdata[0 ...
+* numSampsToProcess-1]. The two buffers can be identical (ie. it can process the
+* data in-place). fftFrameSize defines the FFT frame size used for the
+* processing. Typical values are 1024, 2048 and 4096. It may be any value <=
+* MAX_FRAME_LENGTH but it MUST be a power of 2. osamp is the STFT
+* oversampling factor which also determines the overlap between adjacent STFT
+* frames. It should at least be 4 for moderate scaling ratios. A value of 32 is
+* recommended for best quality. sampleRate takes the sample rate for the signal 
+* in unit Hz, ie. 44100 for 44.1 kHz audio. The data passed to the routine in 
+* indata[] should be in the range [-1.0, 1.0), which is also the output range 
+* for the data, make sure you scale the data accordingly (for 16bit signed integers
+* you would have to divide (and multiply) by 32768). 
+*
+* COPYRIGHT 1999-2006 Stephan M. Bernsee <smb [AT] dspdimension [DOT] com>
+*
+* 						The Wide Open License (WOL)
+*
+* Permission to use, copy, modify, distribute and sell this software and its
+* documentation for any purpose is hereby granted without fee, provided that
+* the above copyright notice and this license appear in all source copies. 
+* THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY OF
+* ANY KIND. See http://www.dspguru.com/wol.htm for more information.
+*
+*****************************************************************************/
+
+/****************************************************************************
+*
+* This code was converted to C# by Michael Knight
+* madmik3 at gmail dot com. 
+* http://sites.google.com/site/mikescoderama/
+*
+*****************************************************************************/
+
+using System;
 using System.Threading;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Diagnostics;
 
 namespace HARMONICA
 {
-    public class PitchShifterPitch
+    public class PitchShifter
     {
 
         #region Private Static Memebers
@@ -18,6 +62,9 @@ namespace HARMONICA
         public static int[] max = new int[10];
         public static int[] Vol = new int[10];
         public static int SampleRate2;
+        private static float MAX, MAXIN, MAX2, coeffVol;
+        private static long IndexMAX, IndexMAX1, IndexMAX2;
+        private static long IndexSTART, IndexEND;
         private static int MAX_FRAME_LENGTH = 48000;
         private static float[] gInFIFO = new float[MAX_FRAME_LENGTH];
         private static int[] kt = new int[MAX_FRAME_LENGTH * 2];
@@ -34,22 +81,28 @@ namespace HARMONICA
         private static float[] gAnaMagn = new float[MAX_FRAME_LENGTH];
         private static float[] gSynFreq = new float[MAX_FRAME_LENGTH];
         private static float[] gSynMagn = new float[MAX_FRAME_LENGTH];
+        private static StreamReader fileName = new StreamReader("Wide_voice.txt", System.Text.Encoding.Default);
+        private static int Nlines = File.ReadAllLines("Wide_voice.txt").Length;
+        private static string[] txt = fileName.ReadToEnd().Split(new char[] { ' ', '.' }, StringSplitOptions.None);
+        private static string[] NoteNames = { "A", "A#", "B/H", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#" };
         private static float ToneStep = (float)Math.Pow(2, 1.0 / 12);//рассчет шага тоны
         private static long gRover, gInit;
         #endregion
 
         #region Public Static  Methods
-        public static void PitchShift(float pitchShift, int sampleCount, float sampleRate, float[] indata)
+        public static void PitchShift(float pitchShift, long sampleCount, float sampleRate, float[] indata)
         {
-            PitchShift(pitchShift, 0, sampleCount, 4096, 4, sampleRate, indata);
+            PitchShift(pitchShift, 0, sampleCount, (long)2048, (long)4, sampleRate, indata);
         }
 
-        public static void PitchShift(float pitchShift, int offset, int sampleCount, int fftFrameSize,
-            int osamp, float sampleRate, float[] indata)
+        public static async void PitchShift(float pitchShift, long offset, long sampleCount, long fftFrameSize,
+            long osamp, float sampleRate, float[] indata)
         {
             double magn, phase, tmp, window, real, imag;
             double freqPerBin, expct;
-            int i, k, qpd, index, inFifoLatency, stepSize, fftFrameSize2;
+            long i, k, qpd, index, inFifoLatency, stepSize, fftFrameSize2;
+            double closestFrequency;//ближайшая частота
+            string noteName;
 
             float[] outdata = indata;
             /* set up some handy variables/настроить некоторые удобные переменные */
@@ -82,7 +135,7 @@ namespace HARMONICA
                         gFFTworksp[2 * k + 1] = 0.0F;
                     }
 
-                    for (k = fftFrameSize; k < sampleRate; k++)
+                    for(k = fftFrameSize; k < sampleRate; k++)
                     {
                         gFFTworksp[k * 2] = 0.0f;
                         gFFTworksp[k * 2 + 1] = 0.0f;
@@ -93,14 +146,15 @@ namespace HARMONICA
                     ShortTimeFourierTransform(gFFTworksp, fftFrameSize, -1);
 
                     /* this is the analysis step/это этап анализа  */
-                    for (k = 0; k < fftFrameSize2; k++)
+                    for (k = 0; k <= fftFrameSize2; k++)
                     {
+
                         /* de-interlace FFT buffer/деинтерлейсный буфер FFT  */
-                        real = gFFTworksp[2 * k] /* TembroClass.kt[k]*/;
-                        imag = gFFTworksp[2 * k + 1] /* TembroClass.kt[k]*/;
+                        real = gFFTworksp[2 * k];
+                        imag = gFFTworksp[2 * k + 1];
 
                         /* compute magnitude and phase/вычислить амплитуду и фазу  */
-                        magn = Math.Sqrt(real * real + imag * imag);//амплитуда
+                        magn = Math.Sqrt(real * real+ imag * imag);//амплитуда
                         phase = Math.Atan2(imag, real);//фаза
 
                         /* compute phase difference/вычислить разность фаз */
@@ -111,7 +165,7 @@ namespace HARMONICA
                         tmp -= (double)k * expct;
 
                         /* map delta phase into +/- Pi interval/сопоставить фазу дельты с интервалом +/- Pi */
-                        qpd = (int)(tmp / Math.PI);
+                        qpd = (long)(tmp / Math.PI);
                         if (qpd >= 0) qpd += qpd & 1;
                         else qpd -= qpd & 1;
                         tmp -= Math.PI * (double)qpd;
@@ -130,6 +184,29 @@ namespace HARMONICA
 
                     }
 
+                    /*MAX = gAnaMagn[0];
+                    IndexMAX = 0;
+                    for(k = 0; k <= fftFrameSize2; k++)
+                    {
+                        MAX = Math.Max(MAX, gAnaMagn[k]);
+                        MAXIN = PitchShifter1.MAXIN;
+                        coeffVol = MAXIN / MAX;
+                        if (MAXIN > 1.8)
+                        {
+                            gAnaMagn[k] *= coeffVol * 0.9f;
+                        }
+                        else
+                        {
+                            gAnaMagn[k] *= 0;
+                        }
+                    }*/
+
+                    for(k = 0; k <= fftFrameSize; k++)
+                    {
+                        //gFFTworksp[2 * k] *= TembroClass.kt[k];
+                        //gFFTworksp[2 * k + 1] *= TembroClass.kt[k];
+                    }
+
                     /* ***************** PROCESSING ******************* */
                     /* this does the actual pitch shifting/это делает фактическое изменение высоты тона */
 
@@ -141,7 +218,7 @@ namespace HARMONICA
 
                     for (k = 0; k <= fftFrameSize2; k++)
                     {
-                        index = (int)(k * pitchShift);
+                        index = (long)(k * pitchShift);
                         if (index <= fftFrameSize2)
                         {
                             gSynMagn[index] += gAnaMagn[k];
@@ -157,7 +234,7 @@ namespace HARMONICA
                         /* get magnitude and true frequency from synthesis arrays/получить величину и истинную частоту из массивов синтеза */
                         magn = gSynMagn[k];
                         tmp = gSynFreq[k];
-
+                        
                         /* subtract bin mid frequency/вычесть среднюю частоту бина */
                         tmp -= (double)k * freqPerBin;
 
@@ -169,7 +246,7 @@ namespace HARMONICA
 
                         /* add the overlap phase advance back in/добавить фазу перекрытия обратно в */
                         tmp += (double)k * expct;
-
+                        
 
                         /* accumulate delta phase to get bin phase/накапливать дельта-фазу, чтобы получить бин-фазу */
                         gSumPhase[k] += (float)tmp;
@@ -188,7 +265,7 @@ namespace HARMONICA
                     /* do inverse transform/сделать обратное преобразование */
                     //await Task.Run(() => FrequencyUtils.FindFundamentalFrequency(gFFTworksp, 44100, 60, 22050));
                     ShortTimeFourierTransform(gFFTworksp, fftFrameSize, 1);
-
+                    
 
                     /* do windowing and add to output accumulator/делать окна и добавлять в выходной аккумулятор */
                     for (k = 0; k < fftFrameSize; k++)

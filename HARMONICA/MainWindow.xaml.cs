@@ -1,8 +1,13 @@
-﻿using CSCore;
+﻿// This is a personal academic project. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
+using CSCore;
 using CSCore.Codecs;
+using CSCore.Codecs.WAV;
 using CSCore.CoreAudioAPI;
 using CSCore.SoundIn;
 using CSCore.SoundOut;
+using CSCore.Streams;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +30,8 @@ using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TEST_API;
+using static System.Net.WebRequestMethods;
+using File = System.IO.File;
 
 namespace HARMONICA
 {
@@ -49,12 +56,17 @@ namespace HARMONICA
         private WasapiCapture mSoundIn;
         private SimpleMixer mMixer;
         private SampleDSPPitch mDspPitch;
+        private SampleDSP mDsp;
         private ISampleSource mMp3;
+        private IWaveSource mSource;
 
         private static string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private static string path2;
 
-        string langindex;
+        string langindex, fileDeleteRec1, fileDeleteCutRec1, fileDeleteRec2, fileDeleteCutRec2;
+        string myfile;
+        string cutmyfile;
+        private string Filename;
 
         private int SampleRate;
         private static int limit = 20;
@@ -206,7 +218,7 @@ namespace HARMONICA
 
 
 
-                //mSoundOut.Initialize(mMixer.ToWaveSource(32).ToMono());
+                mSoundOut.Initialize(mMixer.ToWaveSource(32).ToMono());
 
 
                 mSoundOut.Play();
@@ -274,14 +286,16 @@ namespace HARMONICA
                 if (langindex == "0")
                 {
                     Title = "ГАРМОНИКА";
-                    btnFeeling_in_the_body.ToolTip = "Ощущение в теле";
-                    btnSituation_problem.ToolTip = "Ситуация/проблема";
+                    lbRecordPB.Content = "Идёт запись...";
+                    btnFeeling_in_the_body.ToolTip = "Сеанс «Ощущение в теле»\nХорошо, Вы выбрали сеанс в течение которого сможете\nвысвободить отрицательную энергию, почувствовать себя легче и спокойнее.\nПожалуйста, займите удобное положение.\nВсецело почувствуйте свое тело.\nРасслабьте на выдохе те места, в которых заметили напряжение (играет спокойная музыка – 30 секунд).\nЗакройте глаза. Мы начинаем сеанс.";
+                    btnSituation_problem.ToolTip = "Сеанс «Ситуация/проблема»\nХорошо, Вы выбрали сеанс в течение которого сможете\nпроработать проблему или ситуацию в Вашей жизни,\nчтобы разрешить ее на самом глубинном уровне.\nПожалуйста, займите удобное положение.\nВсецело почувствуйте свое тело.\nРасслабьте на выдохе те места, в которых заметили напряжение (играет спокойная музыка – 30 секунд).\nЗакройте глаза, если так будет комфортнее. Мы начинаем сеанс.";
                 }
                 else
                 {
                     Title = "HARMONICA";
-                    btnFeeling_in_the_body.ToolTip = "Feeling in the body";
-                    btnSituation_problem.ToolTip = "Situation/problem";
+                    lbRecordPB.Content = "Recording in progress...";
+                    btnFeeling_in_the_body.ToolTip = "Session «Feeling in the body»\nWell, you have chosen a session during\nwhich you can release negative energy,\nfeel lighter and calmer.\nPlease take a comfortable position.\nFeel your whole body.Relax as you exhale those places\nwhere you noticed tension (calm music plays - 30 seconds).\nClose your eyes. We start the session.";
+                    btnSituation_problem.ToolTip = "Session «Situation/problem»\nGood. You have chosen a session during which you will be able to\nwork through a problem or situation in your life in order to resolve it at the deepest level.\nPlease take a comfortable position. Feel your whole body.\nRelax as you exhale those places where you noticed tension (calm music plays - 30 seconds).\nClose your eyes if that makes you feel more comfortable. We start the session.";
                 }
 
             }
@@ -304,15 +318,15 @@ namespace HARMONICA
             }
         }
 
-        private async void Sound()
+        private async void Sound(string FileName)
         {
             try
             {
                 Mixer();
-                mMp3 = CodecFactory.Instance.GetCodec("").ToMono().ToSampleSource();
+                mMp3 = CodecFactory.Instance.GetCodec(FileName).ToMono().ToSampleSource();
                 mDspPitch = new SampleDSPPitch(mMp3.ToWaveSource(32).ToSampleSource());
                 //SampleRate = mDspRec.WaveFormat.SampleRate;
-                mMixer.AddSource(mDspPitch.ChangeSampleRate(mDspPitch.WaveFormat.SampleRate).ToWaveSource(32).Loop().ToSampleSource());
+                mMixer.AddSource(mDspPitch.ChangeSampleRate(mDspPitch.WaveFormat.SampleRate).ToWaveSource(32).ToSampleSource());
                 await Task.Run(() => SoundOut());
             }
             catch (Exception ex)
@@ -344,7 +358,461 @@ namespace HARMONICA
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Timer40()
+        {
+            int i = 0;
+            while (i < 40)
+            {
+                i++;
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void TimerRec()
+        {
+            int i = 3;
+            while (i > 0)
+            {
+                Dispatcher.Invoke(() => lbTimer.Content = i.ToString());
+                Thread.Sleep(1000);
+                i--;
+            }
+            Dispatcher.Invoke(() => lbTimer.Content = i.ToString());
+        }
+
+        private async void Feeling_in_the_body()
+        {
+            try
+            {
+                Stop();
+                //Thread.Sleep(2000);
+                btnSituation_problem.IsEnabled = false;
+                btnFeeling_in_the_body.IsEnabled = false;
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\HintFeelingInTheBody.wav";
+                Sound(Filename);
+                await Task.Run(() => Timer30());
+
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBody.wav";
+                Sound(Filename);
+                await Task.Run(() => Timer40());
+
+                //Здесь должно быть что-то типо включения микрофона!!!!!!! А у нас будет что-то типо записи
+                await Task.Run(() => TimerRec());
+                Recording1();
+
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
+                Sound(Filename);
+                await Task.Run(() => Timer30());
+
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFourFeelingInTheBody.wav";
+                Sound(Filename);
+                await Task.Run(() => Timer40());
+
+                //Здесь 3 минуты какой-то херни
+
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFiveFeelingInTheBody.wav";
+                Sound(Filename);
+                await Task.Run(() => Timer30());
+
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в Feeling_in_the_body: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in Feeling_in_the_body: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+        }
+
+        private void Situation_problem()
+        {
+            try
+            {
+                Stop();
+
+
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в Situation_problem: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in Situation_problem: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+        }
+
+        private void Stop()
+        {
+            try
+            {
+                if (mMixer != null)
+                {
+                    mMixer.Dispose();
+                    mMp3.ToWaveSource(32).Loop().ToSampleSource().Dispose();
+                    mMixer = null;
+                }
+                if (mSoundOut != null)
+                {
+                    mSoundOut.Stop();
+                    mSoundOut.Dispose();
+                    mSoundOut = null;
+                }
+                if (mSoundIn != null)
+                {
+                    mSoundIn.Stop();
+                    mSoundIn.Dispose();
+                    mSoundIn = null;
+                }
+                if (mSource != null)
+                {
+                    mSource.Dispose();
+                    mSource = null;
+                }
+                if (mMp3 != null)
+                {
+                    /*if (mDspRec != null)
+                    {
+                        mDspRec.Dispose();
+                    }*/
+                    mMp3.Dispose();
+                    mMp3 = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                /*if (langindex == "0")
+                {
+                    string msg = "Ошибка в Stop: \r\n" + ex.Message;
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in Stop: \r\n" + ex.Message;
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }*/
+            }
+        }
+
+        private void HARMONICA_Closing(object sender, CancelEventArgs e)
+        {
+            Stop();
+            Environment.Exit(0);
+        }
+
+        private void btnFeeling_in_the_body_Click(object sender, RoutedEventArgs e)
+        {
+            Feeling_in_the_body();
+        }
+
+        private async void StartFullDuplex()//запуск пича и громкости
+        {
+            try
+            {
+                //Запускает устройство захвата звука с задержкой 1 мс.
+                //await Task.Run(() => SoundIn());
+                SoundIn();
+
+                var source = new SoundInSource(mSoundIn) { FillWithZeros = true };
+
+                //Init DSP для смещения высоты тона
+                mDsp = new SampleDSP(source.ToSampleSource()/*.AppendSource(Equalizer.Create10BandEqualizer, out mEqualizer)*/.ToMono());
+
+                //SetPitchShiftValue();
+
+                //Инициальный микшер
+                //Mixer();
+
+                //Добавляем наш источник звука в микшер
+                mMixer.AddSource(mDsp.ChangeSampleRate(mMixer.WaveFormat.SampleRate));
+
+                //Запускает устройство воспроизведения звука с задержкой 1 мс.
+                //await Task.Run(() => SoundOut());
+
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в StartFullDuplex: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in StartFullDuplex: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+            //return false;
+        }
+
+        private async void Recording1()
+        {
+            try
+            {
+                //StreamReader FileRecord = new StreamReader("Data_Create.tmp");
+                //StreamReader FileCutRecord = new StreamReader("Data_cutCreate.tmp");
+                //myfile = FileRecord.ReadToEnd();
+                //cutmyfile = FileCutRecord.ReadToEnd();
+                //NFTRecordClick = 1;
+                myfile = "MyRecord1.wav";
+                cutmyfile = "cutMyRecord1.wav";
+                fileDeleteRec1 = myfile;
+                fileDeleteCutRec1 = cutmyfile;
+                //FileRecord.Close();
+                //FileCutRecord.Close();
+                if (File.Exists(myfile))
+                {
+                    File.Delete(myfile);
+                }
+                if (File.Exists(cutmyfile))
+                {
+                    File.Delete(cutmyfile);
+                }
+                using (mSoundIn = new WasapiCapture())
+                {
+                    mSoundIn.Device = mInputDevices[cmbInput.SelectedIndex];
+                    mSoundIn.Initialize();
+
+                    mSoundIn.Start();
+                    pbRecord.Visibility = Visibility.Visible;
+                    lbRecordPB.Visibility = Visibility.Visible;
+                    using (WaveWriter record = new WaveWriter(cutmyfile, mSoundIn.WaveFormat))
+                    {
+                        mSoundIn.DataAvailable += (s, data) => record.Write(data.Data, data.Offset, data.ByteCount);
+                        for (int i = 0; i < 100; i++)
+                        {
+                            pbRecord.Value++;
+                            await Task.Delay(40);
+                            if (pbRecord.Value == 25)
+                            {
+                                string uri1 = @"HARMONICA\Progressbar\Group 13.png";
+                                ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri1) as ImageSource;
+                            }
+                            else if (pbRecord.Value == 50)
+                            {
+                                string uri2 = @"HARMONICA\Progressbar\Group 12.png";
+                                ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri2) as ImageSource;
+                            }
+                            else if (pbRecord.Value == 75)
+                            {
+                                string uri3 = @"HARMONICA\Progressbar\Group 11.png";
+                                ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri3) as ImageSource;
+                            }
+                            else if (pbRecord.Value == 95)
+                            {
+                                string uri4 = @"HARMONICA\Progressbar\Group 10.png";
+                                ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri4) as ImageSource;
+                            }
+                        }
+                        //Thread.Sleep(5000);
+
+                        mSoundIn.Stop();
+                        lbRecordPB.Visibility = Visibility.Hidden;
+                        pbRecord.Value = 0;
+                        pbRecord.Visibility = Visibility.Hidden;
+
+                    }
+                    Thread.Sleep(100);
+                    string uri = @"HARMONICA\Progressbar\progressbar-backgrnd.png";
+                    ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+                    int[] Rdat = new int[150000];
+                    int Ndt;
+                    Ndt = vizualzvuk(cutmyfile, myfile, Rdat, 1);
+                    NFT_drawing1(myfile);
+                    //File.Move(myfile, @"Record\" + myfile);
+                    //CutRecord cutRecord = new CutRecord();
+                    //cutRecord.CutFromWave(cutmyfile, myfile, start, end);
+
+                }
+                if (langindex == "0")
+                {
+                    //ImgBtnRecordClick = 0;
+                    //string uri = @"Neurotuners\button\button-record-inactive.png";
+                    //ImgRecordingBtn.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+                    string msg = "Запись и обработка завершена. Сейчас появится графическое изображение вашего голоса.";
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    //btnPlayerEffect.Opacity = 1;
+                    //WinSkip skip = new WinSkip();
+                    //skip.ShowDialog();
+                }
+                else
+                {
+                    //string uri = @"Neurotuners\button\button-record-inactive.png";
+                    //ImgRecordingBtn.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+                    //btnPlayer.IsEnabled = true;
+                    string msg = "Recording and processing completed. A graphic representation of your voice will now appear.";
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    //btnPlayerEffect.Opacity = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в Recording1: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in Recording1: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+        }
+
+        private async void NFT_drawing1(string filename)
+        {
+            int[] Rdat = new int[250000];
+            int Ndt;
+            int Ww, Hw, k, ik, dWw, dHw;
+            worker.RunWorkerAsync();
+            Ndt = await Task.Run(() =>
+            {
+                return vizualzvuk(filename, filename, Rdat, 0);
+            });
+            Hw = (int)Math.Sqrt(Ndt);
+            Ww = (int)((double)(Ndt) / (double)(Hw) + 0.5);
+            dWw = (int)((Image1.Width - (double)Ww) / 2.0) - 5;
+            if (dWw < 0)
+                dWw = 0;
+            dHw = (int)((Image1.Height - (double)Hw) / 2.0) - 5;
+            if (dHw < 0)
+                dHw = 0;
+            WriteableBitmap wb = new WriteableBitmap((int)Image1.Width, (int)Image1.Height, Ww, Hw, PixelFormats.Bgra32, null);
+
+            // Define the update square (which is as big as the entire image).
+            Int32Rect rect = new Int32Rect(0, 0, (int)Image1.Width, (int)Image1.Height);
+
+            byte[] pixels = new byte[(int)Image1.Width * (int)Image1.Height * wb.Format.BitsPerPixel / 8];
+            //Random rand = new Random();
+            k = 0;
+            ik = 0;
+            int Wwt = 2, Hwt = 2, it0 = Ww / 2, jt0 = Hw / 2, it = 0, jt = 0;
+            int R = 0, G = 0, B = 0, A = 0;
+            int pixelOffset, poffp = 0, kt = 0;
+            while (k < Ndt)
+            {
+                if (ik % 4 == 0)
+                {
+                    R = Rdat[3 * k];
+                    G = Rdat[3 * k + 1];
+                    B = Rdat[3 * k + 2];
+                    A = 255;
+                    pixelOffset = (dWw + it0 + it + (dHw + jt0 + jt) * wb.PixelWidth) * wb.Format.BitsPerPixel / 8;
+                    pixels[pixelOffset] = (byte)B;
+                    pixels[pixelOffset + 1] = (byte)G;
+                    pixels[pixelOffset + 2] = (byte)R;
+                    pixels[pixelOffset + 3] = (byte)A;
+                    jt++;
+                    if (jt == Hwt)
+                    {
+                        ik++;
+                    }
+                }
+                else if (ik % 4 == 1)
+                {
+                    R = Rdat[3 * k];
+                    G = Rdat[3 * k + 1];
+                    B = Rdat[3 * k + 2];
+                    A = 255;
+                    pixelOffset = (dWw + it0 + it + (dHw + jt0 + jt) * wb.PixelWidth) * wb.Format.BitsPerPixel / 8;
+                    pixels[pixelOffset] = (byte)B;
+                    pixels[pixelOffset + 1] = (byte)G;
+                    pixels[pixelOffset + 2] = (byte)R;
+                    pixels[pixelOffset + 3] = (byte)A;
+                    it++;
+                    if (it == Wwt)
+                    {
+                        ik++;
+                    }
+                }
+                else if (ik % 4 == 2)
+                {
+                    R = Rdat[3 * k];
+                    G = Rdat[3 * k + 1];
+                    B = Rdat[3 * k + 2];
+                    A = 255;
+                    pixelOffset = (dWw + it0 + it + (dHw + jt0 + jt) * wb.PixelWidth) * wb.Format.BitsPerPixel / 8;
+                    pixels[pixelOffset] = (byte)B;
+                    pixels[pixelOffset + 1] = (byte)G;
+                    pixels[pixelOffset + 2] = (byte)R;
+                    pixels[pixelOffset + 3] = (byte)A;
+                    jt--;
+                    if (jt == -1)
+                    {
+                        ik++;
+                        //jt0--;
+                    }
+                }
+                else
+                {
+                    R = Rdat[3 * k];
+                    G = Rdat[3 * k + 1];
+                    B = Rdat[3 * k + 2];
+                    A = 255;
+                    pixelOffset = (dWw + it0 + it + (dHw + jt0 + jt) * wb.PixelWidth) * wb.Format.BitsPerPixel / 8;
+                    pixels[pixelOffset] = (byte)B;
+                    pixels[pixelOffset + 1] = (byte)G;
+                    pixels[pixelOffset + 2] = (byte)R;
+                    pixels[pixelOffset + 3] = (byte)A;
+                    it--;
+                    if (it == -1)
+                    {
+                        it = 0;
+                        jt = 0;
+                        ik++;
+                        it0--;
+                        jt0--;
+                        Hwt += 2;
+                        Wwt += 2;
+                    }
+                }
+                int stride = ((int)Image1.Width * wb.Format.BitsPerPixel) / 8;
+                wb.WritePixels(rect, pixels, stride, 0);
+                k++;
+            }
+            // Show the bitmap in an Image element.
+            Image1.Source = wb;
+            Image1.UpdateLayout();
+            //NFTShadow = 1;
+            //imgShadowNFT.Visibility = Visibility.Visible;
+
+            worker.CancelAsync();
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -421,6 +889,15 @@ namespace HARMONICA
                     string msg = "Connect a wired audio headset to your computer.\nIf a headset is not currently connected,\nthen connect a wired headset and restart the program so that the sound is played through the headphones.";
                     MessageBox.Show(msg);
                 }
+
+                Filename = @"HARMONICA\Record\Start.wav";
+                //btnFeeling_in_the_body.IsEnabled = false;
+                //btnSituation_problem.IsEnabled = false;
+                Sound(Filename);
+                await Task.Run(() => Timer30());
+                Stop();
+                //btnFeeling_in_the_body.IsEnabled = true;
+                //btnSituation_problem.IsEnabled = true;
             }
             catch (Exception ex)
             {
