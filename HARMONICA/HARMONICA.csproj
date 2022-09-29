@@ -125,5 +125,17 @@
   <ItemGroup>
     <Resource Include="progressbar-backgrnd.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="button-turbo-inactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="button-turbo1-inactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="button-turbo2-inactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="button-settings-inactive.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

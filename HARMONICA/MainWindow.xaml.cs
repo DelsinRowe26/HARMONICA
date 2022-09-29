@@ -69,6 +69,7 @@ namespace HARMONICA
         string cutmyfile;
         private string Filename;
 
+        private int ImgBtnTurboClick = 0, ImgBtnTurboTwoClick = 0, BtnSetClick = 0;
         private int SampleRate;
         private float pitchVal;
         private float reverbVal;
@@ -289,6 +290,8 @@ namespace HARMONICA
                 if (langindex == "0")
                 {
                     Title = "ГАРМОНИКА";
+                    lbMicrophone.Content = "Выбор микрофона";
+                    lbSpeaker.Content = "Выбор динамиков";
                     lbRecordPB.Content = "Идёт запись...";
                     btnFeeling_in_the_body.ToolTip = "Сеанс «Ощущение в теле»\nХорошо, Вы выбрали сеанс в течение которого сможете\nвысвободить отрицательную энергию, почувствовать себя легче и спокойнее.\nПожалуйста, займите удобное положение.\nВсецело почувствуйте свое тело.\nРасслабьте на выдохе те места, в которых заметили напряжение (играет спокойная музыка – 30 секунд).\nЗакройте глаза. Мы начинаем сеанс.";
                     btnSituation_problem.ToolTip = "Сеанс «Ситуация/проблема»\nХорошо, Вы выбрали сеанс в течение которого сможете\nпроработать проблему или ситуацию в Вашей жизни,\nчтобы разрешить ее на самом глубинном уровне.\nПожалуйста, займите удобное положение.\nВсецело почувствуйте свое тело.\nРасслабьте на выдохе те места, в которых заметили напряжение (играет спокойная музыка – 30 секунд).\nЗакройте глаза, если так будет комфортнее. Мы начинаем сеанс.";
@@ -296,6 +299,8 @@ namespace HARMONICA
                 else
                 {
                     Title = "HARMONICA";
+                    lbMicrophone.Content = "Microphone selection";
+                    lbSpeaker.Content = "Speaker selection";
                     lbRecordPB.Content = "Recording in progress...";
                     btnFeeling_in_the_body.ToolTip = "Session «Feeling in the body»\nWell, you have chosen a session during\nwhich you can release negative energy,\nfeel lighter and calmer.\nPlease take a comfortable position.\nFeel your whole body.Relax as you exhale those places\nwhere you noticed tension (calm music plays - 30 seconds).\nClose your eyes. We start the session.";
                     btnSituation_problem.ToolTip = "Session «Situation/problem»\nGood. You have chosen a session during which you will be able to\nwork through a problem or situation in your life in order to resolve it at the deepest level.\nPlease take a comfortable position. Feel your whole body.\nRelax as you exhale those places where you noticed tension (calm music plays - 30 seconds).\nClose your eyes if that makes you feel more comfortable. We start the session.";
@@ -498,7 +503,12 @@ namespace HARMONICA
                 WinTime();
                 await Task.Run(() => TimerRec());
                 Recording2();
+                await Task.Delay(7000);
 
+                Filename = @"HARMONICA\Record\TheSoundEnd.mp3";
+                Sound(Filename);
+                await Task.Delay(140000);
+                Close();
             }
             catch (Exception ex)
             {
@@ -542,6 +552,7 @@ namespace HARMONICA
                 WinTime();
                 await Task.Run(() => TimerRec());
                 Recording1();
+                await Task.Delay(7000);
 
                 Filename = @"HARMONICA\Record\Situation_problem\AfterStepTwoSituationProblem.wav";
                 Sound(Filename);
@@ -571,6 +582,12 @@ namespace HARMONICA
                 WinTime();
                 await Task.Run(() => TimerRec());
                 Recording2();
+                await Task.Delay(7000);
+
+                Filename = @"HARMONICA\Record\TheSoundEnd.mp3";
+                Sound(Filename);
+                await Task.Delay(140000);
+                Close();
             }
             catch (Exception ex)
             {
@@ -653,6 +670,8 @@ namespace HARMONICA
 
         private void btnFeeling_in_the_body_Click(object sender, RoutedEventArgs e)
         {
+            ImgBtnTurboClick = 1;
+            btnSituationShadow.Opacity = 0;
             Feeling_in_the_body();
         }
 
@@ -830,7 +849,81 @@ namespace HARMONICA
 
         private void btnSituation_problem_Click(object sender, RoutedEventArgs e)
         {
+            ImgBtnTurboTwoClick = 1;
+            btnFeelingShadow.Opacity = 0;
             Situation_problem();
+        }
+
+        private void btnFeeling_in_the_body_MouseMove(object sender, MouseEventArgs e)
+        {
+            string uri = @"HARMONICA\Button\button-turbo-hover.png";
+            ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void btnFeeling_in_the_body_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (ImgBtnTurboClick == 1)
+            {
+                string uri = @"HARMONICA\Button\button-turbo-active.png";
+                ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+            }
+            else
+            {
+                string uri = @"HARMONICA\Button\button-turbo-inactive.png";
+                ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+            }
+        }
+
+        private void btnSituation_problem_MouseMove(object sender, MouseEventArgs e)
+        {
+            string uri = @"HARMONICA\Button\button-turbo2-hover.png";
+            ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void button_MouseMove(object sender, MouseEventArgs e)
+        {
+            string uri = @"HARMONICA\Button\button-settings-hover.png";
+            ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            string uri = @"HARMONICA\Button\button-settings-inactive.png";
+            ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            BtnSetClick++;
+            string uri = @"HARMONICA\Button\button-settings-active.png";
+            ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+            if (BtnSetClick == 1)
+            {
+                tabNFTSet.SelectedItem = TabSettings;
+                lbSpeaker.Visibility = Visibility.Visible;
+                lbMicrophone.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                tabNFTSet.SelectedItem = TabNFT;
+                lbSpeaker.Visibility = Visibility.Hidden;
+                lbMicrophone.Visibility = Visibility.Hidden;
+                BtnSetClick = 0;
+            }
+        }
+
+        private void btnSituation_problem_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (ImgBtnTurboTwoClick == 1)
+            {
+                string uri = @"HARMONICA\Button\button-turbo2-active.png";
+                ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+            }
+            else
+            {
+                string uri = @"HARMONICA\Button\button-turbo2-inactive.png";
+                ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+            }
         }
 
         private async void Recording2()
@@ -894,7 +987,7 @@ namespace HARMONICA
 
                     }
                     Thread.Sleep(100);
-                    string uri = @"Neurotuners\element\progressbar-backgrnd1.png";
+                    string uri = @"HARMONICA\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     int[] Rdat = new int[150000];
                     int Ndt;
@@ -904,13 +997,13 @@ namespace HARMONICA
                 }
                 if (langindex == "0")
                 {
-                    string msg = "Запись и обработка завершена. Сейчас появится графическое изображение вашего голоса. Сейчас вы можете нажав на картинку прослушать свою запись. Либо начать новую сессию нажав на кнопку записи.";
+                    string msg = "Запись и обработка завершена. Сейчас появится графическое изображение вашего голоса.";
                     LogClass.LogWrite(msg);
                     MessageBox.Show(msg);
                 }
                 else
                 {
-                    string msg = "Recording and processing completed. A graphic representation of your voice will now appear. Now you can click on the picture to listen to your recording. Or start a new session by clicking on the record button.";
+                    string msg = "Recording and processing completed. A graphic representation of your voice will now appear.";
                     LogClass.LogWrite(msg);
                     MessageBox.Show(msg);
                 }
@@ -1259,6 +1352,8 @@ namespace HARMONICA
                     //btnFeeling_in_the_body.IsEnabled = false;
                     //btnSituation_problem.IsEnabled = false;
                     Sound(Filename);
+                    btnFeelingShadow.Opacity = 1;
+                    btnSituationShadow.Opacity = 1;
                     await Task.Run(() => Timer30());
                     Stop();
                     //btnFeeling_in_the_body.IsEnabled = true;

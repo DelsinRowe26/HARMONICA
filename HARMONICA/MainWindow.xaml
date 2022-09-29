@@ -10,8 +10,32 @@
         <ImageBrush ImageSource="/32547346-f758-4436-9811-3a4aca09ae1d.png"/>
     </Window.Background>
     <Grid>
-        <Button x:Name="btnFeeling_in_the_body" Content="Button" HorizontalAlignment="Left" Margin="192,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Feeling in the body»&#xA;Well, you have chosen a session during&#xA;which you can release negative energy,&#xA;feel lighter and calmer.&#xA;Please take a comfortable position.&#xA;Feel your whole body.Relax as you exhale those places&#xA;where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes. We start the session." Click="btnFeeling_in_the_body_Click"/>
-        <Button x:Name="btnSituation_problem" Content="Button" HorizontalAlignment="Left" Margin="543,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Situation/problem»&#xA;Good. You have chosen a session during which you will be able to&#xA;work through a problem or situation in your life in order to resolve it at the deepest level.&#xA;Please take a comfortable position. Feel your whole body.&#xA;Relax as you exhale those places where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes if that makes you feel more comfortable. We start the session." Click="btnSituation_problem_Click"/>
+        <Button x:Name="btnFeeling_in_the_body" Content="Button" HorizontalAlignment="Left" Margin="192,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Feeling in the body»&#xA;Well, you have chosen a session during&#xA;which you can release negative energy,&#xA;feel lighter and calmer.&#xA;Please take a comfortable position.&#xA;Feel your whole body.Relax as you exhale those places&#xA;where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes. We start the session." Click="btnFeeling_in_the_body_Click" Foreground="{x:Null}" BorderBrush="{x:Null}" MouseMove="btnFeeling_in_the_body_MouseMove" MouseLeave="btnFeeling_in_the_body_MouseLeave">
+            <Button.Background>
+                <ImageBrush x:Name="ImgBtnFeelingInTheBody" ImageSource="/button-turbo-inactive.png"/>
+            </Button.Background>
+            <Button.Effect>
+                <DropShadowEffect x:Name="btnFeelingShadow" ShadowDepth="0" Color="DarkViolet" Opacity="0" BlurRadius="20"/>
+            </Button.Effect>
+            <Button.Template>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" Width="62" Height="62"></Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="btnSituation_problem" Content="Button" HorizontalAlignment="Left" Margin="543,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Situation/problem»&#xA;Good. You have chosen a session during which you will be able to&#xA;work through a problem or situation in your life in order to resolve it at the deepest level.&#xA;Please take a comfortable position. Feel your whole body.&#xA;Relax as you exhale those places where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes if that makes you feel more comfortable. We start the session." Click="btnSituation_problem_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" MouseMove="btnSituation_problem_MouseMove" MouseLeave="btnSituation_problem_MouseLeave">
+            <Button.Background>
+                <ImageBrush x:Name="ImgBtnSolutionProblem" ImageSource="/button-turbo2-inactive.png"/>
+            </Button.Background>
+            <Button.Effect>
+                <DropShadowEffect x:Name="btnSituationShadow" ShadowDepth="0" Color="DarkViolet" Opacity="0" BlurRadius="20"/>
+            </Button.Effect>
+            <Button.Template>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" Width="62" Height="62"></Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
         <TabControl x:Name="tabNFTSet" Margin="88,135,442,172" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Width="270">
             <TabItem x:Name="TabNFT" Header="gNeuro NFT" Background="{x:Null}" BorderBrush="{x:Null}" Margin="46,-2,-50,0" Visibility="Hidden">
                 <Grid x:Name="GridName" Width="230" Margin="7,0,8,0" Height="230">
@@ -28,14 +52,14 @@
                         <ColumnDefinition Width="27*"/>
                         <ColumnDefinition Width="202*"/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox x:Name="cmbInput" HorizontalAlignment="Center" Margin="14,10,15,0" VerticalAlignment="Top" Width="200" Visibility="Visible" ToolTip="Microphone" Grid.ColumnSpan="2">
+                    <ComboBox x:Name="cmbInput" HorizontalAlignment="Center" Margin="14,40,15,0" VerticalAlignment="Top" Width="200" Visibility="Visible" ToolTip="Microphone" Grid.ColumnSpan="2">
                         <ComboBox.Style>
                             <Style>
                                 <Setter Property="Control.Background" Value="Gainsboro"/>
                             </Style>
                         </ComboBox.Style>
                     </ComboBox>
-                    <ComboBox x:Name="cmbOutput" HorizontalAlignment="Center" Margin="14,47,15,0" VerticalAlignment="Top" Width="200" ToolTip="Speaker" Grid.ColumnSpan="2">
+                    <ComboBox x:Name="cmbOutput" HorizontalAlignment="Center" Margin="14,107,15,0" VerticalAlignment="Top" Width="200" ToolTip="Speaker" Grid.ColumnSpan="2">
                         <ComboBox.Style>
                             <Style>
                                 <Setter Property="Control.Background" Value="Gainsboro"/>
@@ -96,5 +120,17 @@
                 </LinearGradientBrush>
             </Label.Foreground>
         </Label>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="682,20,0,0" VerticalAlignment="Top" Width="62" Height="62" Foreground="{x:Null}" BorderBrush="{x:Null}" MouseMove="button_MouseMove" MouseLeave="button_MouseLeave" Click="button_Click">
+            <Button.Background>
+                <ImageBrush x:Name="ImgBtnSettings" ImageSource="/button-settings-inactive.png"/>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" Width="62" Height="62"></Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Label x:Name="lbMicrophone" Content="Microphone selection" HorizontalAlignment="Left" Margin="147,162,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Visible"/>
+        <Label x:Name="lbSpeaker" Content="Speaker selection" HorizontalAlignment="Left" Margin="161,231,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Visible"/>
     </Grid>
 </Window>
