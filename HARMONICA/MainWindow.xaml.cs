@@ -289,7 +289,7 @@ namespace HARMONICA
 
                 if (langindex == "0")
                 {
-                    Title = "ГАРМОНИКА";
+                    Title = "Автопсихолог";
                     lbMicrophone.Content = "Выбор микрофона";
                     lbSpeaker.Content = "Выбор динамиков";
                     lbRecordPB.Content = "Идёт запись...";
@@ -298,7 +298,7 @@ namespace HARMONICA
                 }
                 else
                 {
-                    Title = "HARMONICA";
+                    Title = "Autopsychologist";
                     lbMicrophone.Content = "Microphone selection";
                     lbSpeaker.Content = "Speaker selection";
                     lbRecordPB.Content = "Recording in progress...";
@@ -461,13 +461,13 @@ namespace HARMONICA
                 //Thread.Sleep(2000);
                 btnSituation_problem.IsEnabled = false;
                 btnFeeling_in_the_body.IsEnabled = false;
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\HintFeelingInTheBody.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\HintFeelingInTheBody1.wav";
                 Sound(Filename);
-                await Task.Run(() => Timer30());
+                await Task.Delay(27000);
 
                 Filename = @"HARMONICA\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Run(() => Timer40());
+                await Task.Delay(38000);
 
                 //Здесь должно быть что-то типо включения микрофона!!!!!!! А у нас будет что-то типо записи
                 WinTime();
@@ -479,11 +479,11 @@ namespace HARMONICA
 
                 Filename = @"HARMONICA\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Run(() => Timer30());
+                await Task.Delay(28000);
 
                 Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFourFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Run(() => Timer40());
+                await Task.Delay(38000);
 
                 //Здесь 3 минуты какой-то херни
                 Stop();
@@ -494,7 +494,7 @@ namespace HARMONICA
 
                 Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFiveFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Run(() => Timer30());
+                await Task.Delay(25000);
 
                 Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord.wav";
                 Sound(Filename);
@@ -507,6 +507,8 @@ namespace HARMONICA
 
                 Filename = @"HARMONICA\Record\TheSoundEnd.mp3";
                 Sound(Filename);
+                HelpUnhelp help = new HelpUnhelp();
+                help.ShowDialog();
                 await Task.Delay(140000);
                 Close();
             }
@@ -586,6 +588,8 @@ namespace HARMONICA
 
                 Filename = @"HARMONICA\Record\TheSoundEnd.mp3";
                 Sound(Filename);
+                HelpUnhelp help = new HelpUnhelp();
+                help.ShowDialog();
                 await Task.Delay(140000);
                 Close();
             }

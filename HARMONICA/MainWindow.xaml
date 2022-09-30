@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HARMONICA"
         mc:Ignorable="d"
-        Title="HARMONICA" Height="602" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing">
+        Title="Autopsychologist" Height="602" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing">
     <Window.Background>
         <ImageBrush ImageSource="/32547346-f758-4436-9811-3a4aca09ae1d.png"/>
     </Window.Background>
@@ -130,7 +130,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Label x:Name="lbMicrophone" Content="Microphone selection" HorizontalAlignment="Left" Margin="147,162,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Visible"/>
-        <Label x:Name="lbSpeaker" Content="Speaker selection" HorizontalAlignment="Left" Margin="161,231,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Visible"/>
+        <Label x:Name="lbMicrophone" Content="Microphone selection" HorizontalAlignment="Left" Margin="151,162,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Hidden"/>
+        <Label x:Name="lbSpeaker" Content="Speaker selection" HorizontalAlignment="Left" Margin="153,231,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Hidden"/>
     </Grid>
 </Window>

@@ -62,6 +62,12 @@
     <Compile Include="ActivationForm.xaml.cs" />
     <Compile Include="check.cs" />
     <Compile Include="FormUpload.cs" />
+    <Compile Include="Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HelpUnhelp.xaml.cs">
+      <DependentUpon>HelpUnhelp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LogClass.cs" />
     <Compile Include="mac.cs" />
     <Compile Include="MessageBoxAct.xaml.cs" />
@@ -75,6 +81,14 @@
     <Page Include="ActivationForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HelpUnhelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
