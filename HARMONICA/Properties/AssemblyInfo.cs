@@ -7,13 +7,13 @@ using System.Windows;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набор атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("HARMONICA")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ReSelf - Mental detox")]
+[assembly: AssemblyDescription("ReSelf - Mental detox programm")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HARMONICA")]
+[assembly: AssemblyCompany("Neurotuners")]
+[assembly: AssemblyProduct("ReSelf - Mental detox")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Neurotuners technologies")]
 [assembly: AssemblyCulture("")]
 
 // Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми

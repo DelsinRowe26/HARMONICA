@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARMONICA", "HARMONICA\HARMONICA.csproj", "{F8214F57-3E1C-445B-9375-280A9E4E986C}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ReSelf - Mental detox v.1.0.0.0 Setup", "ReSelf - Mental detox v.1.0.0.0 Setup\ReSelf - Mental detox v.1.0.0.0 Setup.vdproj", "{0896C965-8886-4EC9-9506-630340F1B1BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{F8214F57-3E1C-445B-9375-280A9E4E986C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8214F57-3E1C-445B-9375-280A9E4E986C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8214F57-3E1C-445B-9375-280A9E4E986C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0896C965-8886-4EC9-9506-630340F1B1BF}.Debug|Any CPU.ActiveCfg = Debug
+		{0896C965-8886-4EC9-9506-630340F1B1BF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

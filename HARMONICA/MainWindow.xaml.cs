@@ -73,7 +73,7 @@ namespace HARMONICA
         private int SampleRate;
         private float pitchVal;
         private float reverbVal;
-        private static int limit = 20;
+        private static int limit = 10;
 
         BackgroundWorker worker;
 
@@ -289,7 +289,7 @@ namespace HARMONICA
 
                 if (langindex == "0")
                 {
-                    Title = "Автопсихолог";
+                    Title = "ReSelf - Ментальный детокс";
                     lbMicrophone.Content = "Выбор микрофона";
                     lbSpeaker.Content = "Выбор динамиков";
                     lbRecordPB.Content = "Идёт запись...";
@@ -298,7 +298,7 @@ namespace HARMONICA
                 }
                 else
                 {
-                    Title = "Autopsychologist";
+                    Title = "ReSelf - Mental detox";
                     lbMicrophone.Content = "Microphone selection";
                     lbSpeaker.Content = "Speaker selection";
                     lbRecordPB.Content = "Recording in progress...";
@@ -461,11 +461,12 @@ namespace HARMONICA
                 //Thread.Sleep(2000);
                 btnSituation_problem.IsEnabled = false;
                 btnFeeling_in_the_body.IsEnabled = false;
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\HintFeelingInTheBody1.wav";
+                button.IsEnabled = false;
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\HintFeelingInTheBody2.wav";
                 Sound(Filename);
                 await Task.Delay(27000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBody.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBody2.wav";
                 Sound(Filename);
                 await Task.Delay(38000);
 
@@ -477,11 +478,11 @@ namespace HARMONICA
                 await Task.Delay(7000);
                 //Thread.Sleep(5000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepThreeFeelingInTheBody2.wav";
                 Sound(Filename);
                 await Task.Delay(28000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFourFeelingInTheBody.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFourFeelingInTheBody2.wav";
                 Sound(Filename);
                 await Task.Delay(38000);
 
@@ -492,11 +493,11 @@ namespace HARMONICA
                 //await Task.Delay(180000);
                 Stop();
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFiveFeelingInTheBody.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFiveFeelingInTheBody2.wav";
                 Sound(Filename);
                 await Task.Delay(25000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord2.wav";
                 Sound(Filename);
                 await Task.Delay(12000);
 
@@ -539,15 +540,16 @@ namespace HARMONICA
                 Stop();
                 btnSituation_problem.IsEnabled = false;
                 btnFeeling_in_the_body.IsEnabled = false;
-                Filename = @"HARMONICA\Record\Situation_problem\HintSituationProblem.wav";
+                button.IsEnabled = false;
+                Filename = @"HARMONICA\Record\Situation_problem\HintSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Run(() => Timer30());
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepOneSituationProblem.wav";
+                Filename = @"HARMONICA\Record\Situation_problem\StepOneSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(24000);
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepTwoSituationProblem.wav";
+                Filename = @"HARMONICA\Record\Situation_problem\StepTwoSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(17000);
 
@@ -556,15 +558,15 @@ namespace HARMONICA
                 Recording1();
                 await Task.Delay(7000);
 
-                Filename = @"HARMONICA\Record\Situation_problem\AfterStepTwoSituationProblem.wav";
+                Filename = @"HARMONICA\Record\Situation_problem\AfterStepTwoSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(7000);
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepThreeSituationProblem.wav";
+                Filename = @"HARMONICA\Record\Situation_problem\StepThreeSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(46000);
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepFourSituationProblem.wav";
+                Filename = @"HARMONICA\Record\Situation_problem\StepFourSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(39000);
 
@@ -573,11 +575,11 @@ namespace HARMONICA
                 await Task.Run(() => PitchTimerSitProb());
                 Stop();
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepFiveSituationProblem.wav";
+                Filename = @"HARMONICA\Record\Situation_problem\StepFiveSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(24000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord2.wav";
                 Sound(Filename);
                 await Task.Delay(12000);
 
@@ -669,6 +671,22 @@ namespace HARMONICA
         private void HARMONICA_Closing(object sender, CancelEventArgs e)
         {
             Stop();
+            if (File.Exists(fileDeleteRec1))
+            {
+                File.Delete(fileDeleteRec1);
+            }
+            if (File.Exists(fileDeleteCutRec1))
+            {
+                File.Delete(fileDeleteCutRec1);
+            }
+            if (File.Exists(fileDeleteRec2))
+            {
+                File.Delete(fileDeleteRec2);
+            }
+            if (File.Exists(fileDeleteCutRec2))
+            {
+                File.Delete(fileDeleteCutRec2);
+            }
             Environment.Exit(0);
         }
 
@@ -1352,14 +1370,14 @@ namespace HARMONICA
                     }
 
 
-                    Filename = @"HARMONICA\Record\Start.wav";
+                    Filename = @"HARMONICA\Record\Start2.wav";
                     //btnFeeling_in_the_body.IsEnabled = false;
                     //btnSituation_problem.IsEnabled = false;
                     Sound(Filename);
                     btnFeelingShadow.Opacity = 1;
                     btnSituationShadow.Opacity = 1;
                     await Task.Run(() => Timer30());
-                    Stop();
+                    //Stop();
                     //btnFeeling_in_the_body.IsEnabled = true;
                     //btnSituation_problem.IsEnabled = true;
                 }

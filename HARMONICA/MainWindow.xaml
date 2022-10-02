@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HARMONICA"
         mc:Ignorable="d"
-        Title="Autopsychologist" Height="602" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing">
+        Title="ReSelf - Mental detox" Height="602" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing">
     <Window.Background>
         <ImageBrush ImageSource="/32547346-f758-4436-9811-3a4aca09ae1d.png"/>
     </Window.Background>
     <Grid>
-        <Button x:Name="btnFeeling_in_the_body" Content="Button" HorizontalAlignment="Left" Margin="192,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Feeling in the body»&#xA;Well, you have chosen a session during&#xA;which you can release negative energy,&#xA;feel lighter and calmer.&#xA;Please take a comfortable position.&#xA;Feel your whole body.Relax as you exhale those places&#xA;where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes. We start the session." Click="btnFeeling_in_the_body_Click" Foreground="{x:Null}" BorderBrush="{x:Null}" MouseMove="btnFeeling_in_the_body_MouseMove" MouseLeave="btnFeeling_in_the_body_MouseLeave">
+        <Button x:Name="btnFeeling_in_the_body" Content="Button" HorizontalAlignment="Left" Margin="182,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Feeling in the body»&#xA;Well, you have chosen a session during&#xA;which you can release negative energy,&#xA;feel lighter and calmer.&#xA;Please take a comfortable position.&#xA;Feel your whole body.Relax as you exhale those places&#xA;where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes. We start the session." Click="btnFeeling_in_the_body_Click" Foreground="{x:Null}" BorderBrush="{x:Null}" MouseMove="btnFeeling_in_the_body_MouseMove" MouseLeave="btnFeeling_in_the_body_MouseLeave">
             <Button.Background>
                 <ImageBrush x:Name="ImgBtnFeelingInTheBody" ImageSource="/button-turbo-inactive.png"/>
             </Button.Background>
@@ -132,5 +132,13 @@
         </Button>
         <Label x:Name="lbMicrophone" Content="Microphone selection" HorizontalAlignment="Left" Margin="151,162,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Hidden"/>
         <Label x:Name="lbSpeaker" Content="Speaker selection" HorizontalAlignment="Left" Margin="153,231,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Hidden"/>
+        <Label x:Name="lbTitle" Content="ReSelf - Mental detox" HorizontalAlignment="Center" Margin="0,476,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF100B7"/>
+                    <GradientStop Color="#FF8D00FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
     </Grid>
 </Window>
