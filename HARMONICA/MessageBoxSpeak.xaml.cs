@@ -19,9 +19,25 @@ namespace HARMONICA
     /// </summary>
     public partial class MessageBoxSpeak : Window
     {
+        int click = 0;
         public MessageBoxSpeak()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (click == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            await Task.Delay(5000);
+            click = 1;
+            Close();
         }
     }
 }

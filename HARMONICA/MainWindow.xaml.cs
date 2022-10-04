@@ -58,7 +58,7 @@ namespace HARMONICA
         private SimpleMixer mMixer;
         private SampleDSPPitch mDspPitch;
         private SampleDSP mDsp;
-        private ISampleSource mMp3;
+        private ISampleSource mMp3, mMp4;
         private IWaveSource mSource;
 
         private static string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -69,7 +69,7 @@ namespace HARMONICA
         string cutmyfile;
         private string Filename;
 
-        private int ImgBtnTurboClick = 0, ImgBtnTurboTwoClick = 0, BtnSetClick = 0;
+        private int ImgBtnTurboClick = 0, ImgBtnTurboTwoClick = 0, BtnSetClick = 0, ShadowClick = 0;
         private int SampleRate;
         private float pitchVal;
         private float reverbVal;
@@ -293,8 +293,8 @@ namespace HARMONICA
                     lbMicrophone.Content = "Выбор микрофона";
                     lbSpeaker.Content = "Выбор динамиков";
                     lbRecordPB.Content = "Идёт запись...";
-                    btnFeeling_in_the_body.ToolTip = "Сеанс «Ощущение в теле»\nХорошо, Вы выбрали сеанс в течение которого сможете\nвысвободить отрицательную энергию, почувствовать себя легче и спокойнее.\nПожалуйста, займите удобное положение.\nВсецело почувствуйте свое тело.\nРасслабьте на выдохе те места, в которых заметили напряжение (играет спокойная музыка – 30 секунд).\nЗакройте глаза. Мы начинаем сеанс.";
-                    btnSituation_problem.ToolTip = "Сеанс «Ситуация/проблема»\nХорошо, Вы выбрали сеанс в течение которого сможете\nпроработать проблему или ситуацию в Вашей жизни,\nчтобы разрешить ее на самом глубинном уровне.\nПожалуйста, займите удобное положение.\nВсецело почувствуйте свое тело.\nРасслабьте на выдохе те места, в которых заметили напряжение (играет спокойная музыка – 30 секунд).\nЗакройте глаза, если так будет комфортнее. Мы начинаем сеанс.";
+                    btnFeeling_in_the_body.ToolTip = "Сеанс «Ощущение в теле»";
+                    btnSituation_problem.ToolTip = "Сеанс «Ситуация/проблема»";
                 }
                 else
                 {
@@ -302,8 +302,8 @@ namespace HARMONICA
                     lbMicrophone.Content = "Microphone selection";
                     lbSpeaker.Content = "Speaker selection";
                     lbRecordPB.Content = "Recording in progress...";
-                    btnFeeling_in_the_body.ToolTip = "Session «Feeling in the body»\nWell, you have chosen a session during\nwhich you can release negative energy,\nfeel lighter and calmer.\nPlease take a comfortable position.\nFeel your whole body.Relax as you exhale those places\nwhere you noticed tension (calm music plays - 30 seconds).\nClose your eyes. We start the session.";
-                    btnSituation_problem.ToolTip = "Session «Situation/problem»\nGood. You have chosen a session during which you will be able to\nwork through a problem or situation in your life in order to resolve it at the deepest level.\nPlease take a comfortable position. Feel your whole body.\nRelax as you exhale those places where you noticed tension (calm music plays - 30 seconds).\nClose your eyes if that makes you feel more comfortable. We start the session.";
+                    btnFeeling_in_the_body.ToolTip = "Session «Feeling in the body»";
+                    btnSituation_problem.ToolTip = "Session «Situation/problem»";
                 }
 
             }
@@ -336,6 +336,35 @@ namespace HARMONICA
                 //SampleRate = mDspRec.WaveFormat.SampleRate;
                 mMixer.AddSource(mMp3.ChangeSampleRate(mMp3.WaveFormat.SampleRate).ToWaveSource(32).ToSampleSource());
                 await Task.Run(() => SoundOut());
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в Sound: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in Sound: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+        }
+
+        private async void SoundBack(string FileName)
+        {
+            try
+            {
+                //Mixer();
+                mMp4 = CodecFactory.Instance.GetCodec(FileName).ToMono().ToSampleSource();
+                //mDspPitch = new SampleDSPPitch(mMp3.ToWaveSource(32).ToSampleSource());
+                //SampleRate = mDspRec.WaveFormat.SampleRate;
+                mMixer.AddSource(mMp4.ChangeSampleRate(mMp4.WaveFormat.SampleRate).ToWaveSource(32).ToSampleSource());
             }
             catch (Exception ex)
             {
@@ -456,35 +485,40 @@ namespace HARMONICA
         {
             try
             {
+                ShadowClick = 1;
                 Feeling_in_the_body_pattern();
                 Stop();
                 //Thread.Sleep(2000);
                 btnSituation_problem.IsEnabled = false;
                 btnFeeling_in_the_body.IsEnabled = false;
                 button.IsEnabled = false;
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\HintFeelingInTheBody2.wav";
+
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\HintFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Delay(27000);
+                SoundBack(@"HARMONICA\Record\tunetank.com_471_everest_by_alex-makemusic2.mp3");
+                await Task.Delay(55000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBody2.wav";
-                Sound(Filename);
-                await Task.Delay(38000);
-
-                //Здесь должно быть что-то типо включения микрофона!!!!!!! А у нас будет что-то типо записи
-                WinTime();
-                await Task.Run(() => TimerRec());
-                Recording1();
-
-                await Task.Delay(7000);
-                //Thread.Sleep(5000);
-
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepThreeFeelingInTheBody2.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBody.wav";
                 Sound(Filename);
                 await Task.Delay(28000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFourFeelingInTheBody2.wav";
+                //Здесь должно быть что-то типо включения микрофона!!!!!!! А у нас будет что-то типо записи
+                //WinTime();
+                await Task.Run(() => TimerRec());
+                await Task.Run(() => StartFullDuplex1());
+                Recording1();
+                await Task.Delay(5000);
+                Stop();
+                await Task.Delay(7000);
+                //Thread.Sleep(5000);
+
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Delay(38000);
+                await Task.Delay(31000);
+
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFourFeelingInTheBody.wav";
+                Sound(Filename);
+                await Task.Delay(35000);
 
                 //Здесь 3 минуты какой-то херни
                 Stop();
@@ -493,11 +527,11 @@ namespace HARMONICA
                 //await Task.Delay(180000);
                 Stop();
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFiveFeelingInTheBody2.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFiveFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Delay(25000);
+                await Task.Delay(23000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord2.wav";
+                Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord.wav";
                 Sound(Filename);
                 await Task.Delay(12000);
 
@@ -536,6 +570,7 @@ namespace HARMONICA
         {
             try
             {
+                ShadowClick = 1;
                 Situation_Problem_pattern();
                 Stop();
                 btnSituation_problem.IsEnabled = false;
@@ -748,6 +783,51 @@ namespace HARMONICA
             //return false;
         }
 
+        private async void StartFullDuplex1()//запуск пича и громкости
+        {
+            try
+            {
+                //Запускает устройство захвата звука с задержкой 1 мс.
+                //await Task.Run(() => SoundIn());
+                SoundIn();
+
+                var source = new SoundInSource(mSoundIn) { FillWithZeros = true };
+
+                //Init DSP для смещения высоты тона
+                mDspPitch = new SampleDSPPitch(source.ToSampleSource().ToMono());
+
+                SetPitchShiftValue();
+
+                //Инициальный микшер
+                Mixer();
+
+                //Добавляем наш источник звука в микшер
+                mMixer.AddSource(mDspPitch.ChangeSampleRate(mMixer.WaveFormat.SampleRate));
+
+                //Запускает устройство воспроизведения звука с задержкой 1 мс.
+                await Task.Run(() => SoundOut());
+
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в StartFullDuplex: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in StartFullDuplex: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+            //return false;
+        }
+
         private async void Recording1()
         {
             try
@@ -834,7 +914,7 @@ namespace HARMONICA
                     //ImgRecordingBtn.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     string msg = "Запись и обработка завершена. Сейчас появится графическое изображение вашего голоса.";
                     LogClass.LogWrite(msg);
-                    MessageBox.Show(msg);
+                    //MessageBox.Show(msg);
                     //btnPlayerEffect.Opacity = 1;
                     //WinSkip skip = new WinSkip();
                     //skip.ShowDialog();
@@ -846,7 +926,7 @@ namespace HARMONICA
                     //btnPlayer.IsEnabled = true;
                     string msg = "Recording and processing completed. A graphic representation of your voice will now appear.";
                     LogClass.LogWrite(msg);
-                    MessageBox.Show(msg);
+                    //MessageBox.Show(msg);
                     //btnPlayerEffect.Opacity = 1;
                 }
             }
@@ -898,7 +978,7 @@ namespace HARMONICA
 
         private void btnSituation_problem_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"HARMONICA\Button\button-turbo2-hover.png";
+            string uri = @"HARMONICA\Button\button-turbo-hover2.png";
             ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
@@ -938,12 +1018,12 @@ namespace HARMONICA
         {
             if (ImgBtnTurboTwoClick == 1)
             {
-                string uri = @"HARMONICA\Button\button-turbo2-active.png";
+                string uri = @"HARMONICA\Button\button-turbo-active2.png";
                 ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
             else
             {
-                string uri = @"HARMONICA\Button\button-turbo2-inactive.png";
+                string uri = @"HARMONICA\Button\button-turbo-inactive2.png";
                 ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
         }
@@ -1360,8 +1440,12 @@ namespace HARMONICA
 
                     if (langindex == "0")
                     {
-                        string msg = "Подключите проводную аудио-гарнитуру к компьютеру.\nЕсли на данный момент гарнитура не подключена,\nто подключите проводную гарнитуру, и перезапустите программу для того, чтобы звук подавался в наушники.";
-                        MessageBox.Show(msg);
+                        MessageBoxSpeak boxSpeak = new MessageBoxSpeak();
+                        boxSpeak.ShowDialog();
+                        //await Task.Delay(5000);
+                        //boxSpeak.Close();
+                        //string msg = "Подключите проводную аудио-гарнитуру к компьютеру.\nЕсли на данный момент гарнитура не подключена,\nто подключите проводную гарнитуру, и перезапустите программу для того, чтобы звук подавался в наушники.";
+                        //MessageBox.Show(msg);
                         
                         
                     }
@@ -1372,13 +1456,34 @@ namespace HARMONICA
                     }
 
 
-                    Filename = @"HARMONICA\Record\Start2.wav";
+                    Filename = @"HARMONICA\Record\Start.wav";
                     //btnFeeling_in_the_body.IsEnabled = false;
                     //btnSituation_problem.IsEnabled = false;
-                    Sound(Filename);
-                    btnFeelingShadow.Opacity = 1;
-                    btnSituationShadow.Opacity = 1;
-                    await Task.Run(() => Timer30());
+                    await Task.Run(() => Sound(Filename));
+                    await Task.Run(() => SoundBack(@"HARMONICA\Record\tunetank.com_471_everest_by_alex-makemusic2.mp3"));
+                    await Task.Delay(18000);
+                    if (ShadowClick == 0)
+                    {
+                        btnFeelingShadow.Opacity = 1;
+                        await Task.Delay(500);
+                        btnFeelingShadow.Opacity = 0;
+                        btnSituationShadow.Opacity = 1;
+                        await Task.Delay(500);
+                        btnFeelingShadow.Opacity = 1;
+                        btnSituationShadow.Opacity = 0;
+                        await Task.Delay(500);
+                        btnFeelingShadow.Opacity = 0;
+                        btnSituationShadow.Opacity = 1;
+                        await Task.Delay(500);
+                        btnFeelingShadow.Opacity = 1;
+                        btnSituationShadow.Opacity = 0;
+                        await Task.Delay(500);
+                        btnFeelingShadow.Opacity = 0;
+                        btnSituationShadow.Opacity = 1;
+                        await Task.Delay(500);
+                        btnFeelingShadow.Opacity = 1;
+                    }
+                    await Task.Delay(7000);
                     //Stop();
                     //btnFeeling_in_the_body.IsEnabled = true;
                     //btnSituation_problem.IsEnabled = true;

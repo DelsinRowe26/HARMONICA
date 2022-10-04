@@ -5,9 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HARMONICA"
         mc:Ignorable="d"
-        Title="MessageBoxSpeak" Height="200" Width="480">
+        Title="MessageBoxSpeak" Height="200" Width="480" Topmost="True" Closing="Window_Closing" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
-        <TextBlock x:Name="tbTextSpeak" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="130" Width="413"/>
+        <TextBlock x:Name="tbTextSpeak" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Подключите проводную аудио-гарнитуру к компьютеру. Если на данный момент гарнитура не подключена, то подключите проводную гарнитуру, и перезапустите программу для того, чтобы звук подавался в наушники." VerticalAlignment="Top" Height="130" Width="413" FontSize="16" FontWeight="Bold">
+            <TextBlock.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF100B7"/>
+                    <GradientStop Color="#FF8D00FF" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
 
     </Grid>
 </Window>

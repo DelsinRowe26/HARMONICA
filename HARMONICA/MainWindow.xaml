@@ -25,7 +25,7 @@
         </Button>
         <Button x:Name="btnSituation_problem" Content="Button" HorizontalAlignment="Left" Margin="543,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Situation/problem»&#xA;Good. You have chosen a session during which you will be able to&#xA;work through a problem or situation in your life in order to resolve it at the deepest level.&#xA;Please take a comfortable position. Feel your whole body.&#xA;Relax as you exhale those places where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes if that makes you feel more comfortable. We start the session." Click="btnSituation_problem_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" MouseMove="btnSituation_problem_MouseMove" MouseLeave="btnSituation_problem_MouseLeave">
             <Button.Background>
-                <ImageBrush x:Name="ImgBtnSolutionProblem" ImageSource="/button-turbo2-inactive.png"/>
+                <ImageBrush x:Name="ImgBtnSolutionProblem" ImageSource="/button-turbo-inactive2.png"/>
             </Button.Background>
             <Button.Effect>
                 <DropShadowEffect x:Name="btnSituationShadow" ShadowDepth="0" Color="DarkViolet" Opacity="0" BlurRadius="20"/>

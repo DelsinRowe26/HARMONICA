@@ -158,5 +158,8 @@
   <ItemGroup>
     <Resource Include="button-settings-inactive.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="button-turbo-inactive2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
