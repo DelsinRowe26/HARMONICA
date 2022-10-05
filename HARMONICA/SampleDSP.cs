@@ -19,11 +19,7 @@ namespace HARMONICA
         }
         public /*async Task<int>*/ int Read(float[] buffer, int offset, int count)
         {
-            try
-            {
                 //double[] buffer1 = new double[count];
-                double closestfreq = 0;
-                float AmpSr = 0;
                 float gainAmplification = (float)(Math.Pow(10.0, (GainDB) / 20.0));//получить Усиление
                 int samples = mSource.Read(buffer, offset, count);//образцы
                                                                   //if (gainAmplification != 1.0f) 
@@ -37,11 +33,6 @@ namespace HARMONICA
                 PitchShifter.PitchShift(PitchShift, offset, count, 4096, 4, mSource.WaveFormat.SampleRate, buffer);
 
                 return samples;
-            }
-            catch
-            {
-                return 0;
-            }
         }
 
         public float GainDB { get; set; }

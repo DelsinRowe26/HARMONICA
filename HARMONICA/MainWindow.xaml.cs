@@ -69,7 +69,7 @@ namespace HARMONICA
         string cutmyfile;
         private string Filename;
 
-        private int ImgBtnTurboClick = 0, ImgBtnTurboTwoClick = 0, BtnSetClick = 0, ShadowClick = 0;
+        private int ImgBtnTurboClick = 0, ImgBtnTurboTwoClick = 0, BtnSetClick = 0, ShadowClick = 0, SoundClick = 0;
         private int SampleRate;
         private float pitchVal;
         private float reverbVal;
@@ -221,8 +221,14 @@ namespace HARMONICA
                 //mSoundOut.Device = mOutputDevices[cmbOutput.SelectedIndex];
 
 
-
-                mSoundOut.Initialize(mMixer.ToWaveSource(32).ToMono());
+                if (SoundClick == 0)
+                {
+                    mSoundOut.Initialize(mMp3.ToWaveSource(32).ToMono());
+                }
+                else
+                {
+                    mSoundOut.Initialize(mMixer.ToWaveSource(32).ToMono());
+                }
 
 
                 mSoundOut.Play();
@@ -330,41 +336,11 @@ namespace HARMONICA
         {
             try
             {
+                SoundClick = 0;
                 Mixer();
                 mMp3 = CodecFactory.Instance.GetCodec(FileName).ToMono().ToSampleSource();
-                //mDspPitch = new SampleDSPPitch(mMp3.ToWaveSource(32).ToSampleSource());
-                //SampleRate = mDspRec.WaveFormat.SampleRate;
-                mMixer.AddSource(mMp3.ChangeSampleRate(mMp3.WaveFormat.SampleRate).ToWaveSource(32).ToSampleSource());
+                mMixer.AddSource(mMp3.ChangeSampleRate(mMp3.WaveFormat.SampleRate));
                 await Task.Run(() => SoundOut());
-            }
-            catch (Exception ex)
-            {
-                if (langindex == "0")
-                {
-                    string msg = "Ошибка в Sound: \r\n" + ex.Message;
-                    LogClass.LogWrite(msg);
-                    MessageBox.Show(msg);
-                    Debug.WriteLine(msg);
-                }
-                else
-                {
-                    string msg = "Error in Sound: \r\n" + ex.Message;
-                    LogClass.LogWrite(msg);
-                    MessageBox.Show(msg);
-                    Debug.WriteLine(msg);
-                }
-            }
-        }
-
-        private async void SoundBack(string FileName)
-        {
-            try
-            {
-                //Mixer();
-                mMp4 = CodecFactory.Instance.GetCodec(FileName).ToMono().ToSampleSource();
-                //mDspPitch = new SampleDSPPitch(mMp3.ToWaveSource(32).ToSampleSource());
-                //SampleRate = mDspRec.WaveFormat.SampleRate;
-                mMixer.AddSource(mMp4.ChangeSampleRate(mMp4.WaveFormat.SampleRate).ToWaveSource(32).ToSampleSource());
             }
             catch (Exception ex)
             {
@@ -419,6 +395,8 @@ namespace HARMONICA
             Dispatcher.Invoke(() => lbTimer.Visibility = Visibility.Hidden);
         }
 
+
+
         private void WinTime()
         {
             if(langindex == "0")
@@ -437,7 +415,7 @@ namespace HARMONICA
         private void Situation_Problem_pattern()
         {
             TembroClass tembro = new TembroClass();
-            string PathFile = @"HARMONICA\Record\Situation_problem\LiftUp Effect.tmp";
+            string PathFile = @"ReSelf - Mental detox\Record\Situation_problem\LiftUp Effect.tmp";
             tembro.Tembro(SampleRate, PathFile);
             pitchVal = 0;
             reverbVal = 250;
@@ -446,7 +424,7 @@ namespace HARMONICA
         private void Feeling_in_the_body_pattern()
         {
             TembroClass tembro = new TembroClass();
-            string PathFile = @"HARMONICA\Record\Feeling_in_the_body\Wide_voiceMan.tmp";
+            string PathFile = @"ReSelf - Mental detox\Record\Feeling_in_the_body\Wide_voiceMan.tmp";
             tembro.Tembro(SampleRate, PathFile);
             pitchVal = 0;
             reverbVal = 150;
@@ -471,14 +449,18 @@ namespace HARMONICA
 
         private void PitchTimerFeelInTheBody()
         {
-            int i = 0;
-            while (i < 180)
+            int i = 180;
+            Dispatcher.Invoke(() => lbTimer.Visibility = Visibility.Visible);
+            while (i > 0)
             {
+                Dispatcher.Invoke(() => lbTimer.Content = i.ToString());
                 pitchVal -= 0.014f;
                 SetPitchShiftValue();
-                i++;
                 Thread.Sleep(1000);
+                i--;
             }
+            Dispatcher.Invoke(() => lbTimer.Content = i.ToString());
+            Dispatcher.Invoke(() => lbTimer.Visibility = Visibility.Hidden);
         }
 
         private async void Feeling_in_the_body()
@@ -493,33 +475,43 @@ namespace HARMONICA
                 btnFeeling_in_the_body.IsEnabled = false;
                 button.IsEnabled = false;
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\HintFeelingInTheBody.wav";
+                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\HintFeelingInTheBody_StepOneAndTwoFeelingInTheBody.wav";
                 Sound(Filename);
-                SoundBack(@"HARMONICA\Record\tunetank.com_471_everest_by_alex-makemusic2.mp3");
-                await Task.Delay(55000);
+                await Task.Delay(89000);
+                //Stop();
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBody.wav";
+                /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBodyMusic.wav";
                 Sound(Filename);
-                await Task.Delay(28000);
+                await Task.Delay(34000);*/
+                
 
                 //Здесь должно быть что-то типо включения микрофона!!!!!!! А у нас будет что-то типо записи
                 //WinTime();
+                lbText.Content = "Сейчас начнется запись голоса.";
+                lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
+                Stop();
+                lbText.Visibility = Visibility.Hidden;
                 await Task.Run(() => StartFullDuplex1());
                 Recording1();
                 await Task.Delay(5000);
+                
                 Stop();
-                await Task.Delay(7000);
+                await Task.Delay(2000);
                 //Thread.Sleep(5000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
-                Sound(Filename);
-                await Task.Delay(31000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFourFeelingInTheBody.wav";
+                /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Delay(35000);
+                await Task.Delay(32000);*/
 
+                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepThreeFeelingInTheBody_StepFourFeelingInTheBody.wav";
+                Sound(Filename);
+                await Task.Delay(63000);
+                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(5000);
+                lbText.Visibility = Visibility.Hidden;
                 //Здесь 3 минуты какой-то херни
                 Stop();
                 StartFullDuplex();
@@ -527,20 +519,23 @@ namespace HARMONICA
                 //await Task.Delay(180000);
                 Stop();
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\StepFiveFeelingInTheBody.wav";
+                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepFiveFeelingInTheBody.wav";
                 Sound(Filename);
                 await Task.Delay(23000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord.wav";
+                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\RepeatRecord.wav";
                 Sound(Filename);
                 await Task.Delay(12000);
 
-                WinTime();
+                //WinTime();
+                lbText.Content = "Сейчас начнется запись голоса.";
+                lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
+                lbText.Visibility = Visibility.Hidden;
                 Recording2();
                 await Task.Delay(7000);
 
-                Filename = @"HARMONICA\Record\TheSoundEnd.mp3";
+                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
                 Sound(Filename);
                 HelpUnhelp help = new HelpUnhelp();
                 help.ShowDialog();
@@ -576,15 +571,15 @@ namespace HARMONICA
                 btnSituation_problem.IsEnabled = false;
                 btnFeeling_in_the_body.IsEnabled = false;
                 button.IsEnabled = false;
-                Filename = @"HARMONICA\Record\Situation_problem\HintSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\HintSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Run(() => Timer30());
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepOneSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepOneSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(24000);
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepTwoSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepTwoSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(17000);
 
@@ -593,15 +588,15 @@ namespace HARMONICA
                 Recording1();
                 await Task.Delay(7000);
 
-                Filename = @"HARMONICA\Record\Situation_problem\AfterStepTwoSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\AfterStepTwoSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(7000);
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepThreeSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepThreeSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(46000);
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepFourSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepFourSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(39000);
 
@@ -610,11 +605,11 @@ namespace HARMONICA
                 await Task.Run(() => PitchTimerSitProb());
                 Stop();
 
-                Filename = @"HARMONICA\Record\Situation_problem\StepFiveSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepFiveSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(24000);
 
-                Filename = @"HARMONICA\Record\Feeling_in_the_body\RepeatRecord2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\RepeatRecord2.wav";
                 Sound(Filename);
                 await Task.Delay(12000);
 
@@ -623,7 +618,7 @@ namespace HARMONICA
                 Recording2();
                 await Task.Delay(7000);
 
-                Filename = @"HARMONICA\Record\TheSoundEnd.mp3";
+                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
                 Sound(Filename);
                 HelpUnhelp help = new HelpUnhelp();
                 help.ShowDialog();
@@ -656,7 +651,7 @@ namespace HARMONICA
                 if (mMixer != null)
                 {
                     mMixer.Dispose();
-                    mMp3.ToWaveSource(32).Loop().ToSampleSource().Dispose();
+                    //mMp3.ToWaveSource(32).Loop().ToSampleSource().Dispose();
                     mMixer = null;
                 }
                 if (mSoundOut != null)
@@ -685,6 +680,7 @@ namespace HARMONICA
                     mMp3.Dispose();
                     mMp3 = null;
                 }
+                
             }
             catch (Exception ex)
             {
@@ -736,6 +732,7 @@ namespace HARMONICA
         {
             try
             {
+                SoundClick = 1;
                 //Запускает устройство захвата звука с задержкой 1 мс.
                 //await Task.Run(() => SoundIn());
                 SoundIn();
@@ -787,6 +784,7 @@ namespace HARMONICA
         {
             try
             {
+                SoundClick = 1;
                 //Запускает устройство захвата звука с задержкой 1 мс.
                 //await Task.Run(() => SoundIn());
                 SoundIn();
@@ -868,22 +866,22 @@ namespace HARMONICA
                             await Task.Delay(35);
                             if (pbRecord.Value == 25)
                             {
-                                string uri1 = @"HARMONICA\Progressbar\Group 13.png";
+                                string uri1 = @"ReSelf - Mental detox\Progressbar\Group 13.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri1) as ImageSource;
                             }
                             else if (pbRecord.Value == 50)
                             {
-                                string uri2 = @"HARMONICA\Progressbar\Group 12.png";
+                                string uri2 = @"ReSelf - Mental detox\Progressbar\Group 12.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri2) as ImageSource;
                             }
                             else if (pbRecord.Value == 75)
                             {
-                                string uri3 = @"HARMONICA\Progressbar\Group 11.png";
+                                string uri3 = @"ReSelf - Mental detox\Progressbar\Group 11.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri3) as ImageSource;
                             }
                             else if (pbRecord.Value == 95)
                             {
-                                string uri4 = @"HARMONICA\Progressbar\Group 10.png";
+                                string uri4 = @"ReSelf - Mental detox\Progressbar\Group 10.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri4) as ImageSource;
                             }
                         }
@@ -896,7 +894,7 @@ namespace HARMONICA
 
                     }
                     Thread.Sleep(100);
-                    string uri = @"HARMONICA\Progressbar\progressbar-backgrnd.png";
+                    string uri = @"ReSelf - Mental detox\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     int[] Rdat = new int[150000];
                     int Ndt;
@@ -958,7 +956,7 @@ namespace HARMONICA
 
         private void btnFeeling_in_the_body_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"HARMONICA\Button\button-turbo-hover.png";
+            string uri = @"ReSelf - Mental detox\Button\button-turbo-hover.png";
             ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
@@ -966,38 +964,38 @@ namespace HARMONICA
         {
             if (ImgBtnTurboClick == 1)
             {
-                string uri = @"HARMONICA\Button\button-turbo-active.png";
+                string uri = @"ReSelf - Mental detox\Button\button-turbo-active.png";
                 ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
             else
             {
-                string uri = @"HARMONICA\Button\button-turbo-inactive.png";
+                string uri = @"ReSelf - Mental detox\Button\button-turbo-inactive.png";
                 ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
         }
 
         private void btnSituation_problem_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"HARMONICA\Button\button-turbo-hover2.png";
+            string uri = @"ReSelf - Mental detox\Button\button-turbo-hover2.png";
             ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void button_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"HARMONICA\Button\button-settings-hover.png";
+            string uri = @"ReSelf - Mental detox\Button\button-settings-hover.png";
             ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void button_MouseLeave(object sender, MouseEventArgs e)
         {
-            string uri = @"HARMONICA\Button\button-settings-inactive.png";
+            string uri = @"ReSelf - Mental detox\Button\button-settings-inactive.png";
             ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             BtnSetClick++;
-            string uri = @"HARMONICA\Button\button-settings-active.png";
+            string uri = @"ReSelf - Mental detox\Button\button-settings-active.png";
             ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             if (BtnSetClick == 1)
             {
@@ -1018,12 +1016,12 @@ namespace HARMONICA
         {
             if (ImgBtnTurboTwoClick == 1)
             {
-                string uri = @"HARMONICA\Button\button-turbo-active2.png";
+                string uri = @"ReSelf - Mental detox\Button\button-turbo-active2.png";
                 ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
             else
             {
-                string uri = @"HARMONICA\Button\button-turbo-inactive2.png";
+                string uri = @"ReSelf - Mental detox\Button\button-turbo-inactive2.png";
                 ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
         }
@@ -1061,22 +1059,22 @@ namespace HARMONICA
                             await Task.Delay(35);
                             if (pbRecord.Value == 25)
                             {
-                                string uri1 = @"HARMONICA\Progressbar\Group 13.png";
+                                string uri1 = @"ReSelf - Mental detox\Progressbar\Group 13.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri1) as ImageSource;
                             }
                             else if (pbRecord.Value == 50)
                             {
-                                string uri2 = @"HARMONICA\Progressbar\Group 12.png";
+                                string uri2 = @"ReSelf - Mental detox\Progressbar\Group 12.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri2) as ImageSource;
                             }
                             else if (pbRecord.Value == 75)
                             {
-                                string uri3 = @"HARMONICA\Progressbar\Group 11.png";
+                                string uri3 = @"ReSelf - Mental detox\Progressbar\Group 11.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri3) as ImageSource;
                             }
                             else if (pbRecord.Value == 95)
                             {
-                                string uri4 = @"HARMONICA\Progressbar\Group 10.png";
+                                string uri4 = @"ReSelf - Mental detox\Progressbar\Group 10.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri4) as ImageSource;
                             }
                         }
@@ -1089,7 +1087,7 @@ namespace HARMONICA
 
                     }
                     Thread.Sleep(100);
-                    string uri = @"HARMONICA\Progressbar\progressbar-backgrnd.png";
+                    string uri = @"ReSelf - Mental detox\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     int[] Rdat = new int[150000];
                     int Ndt;
@@ -1101,13 +1099,13 @@ namespace HARMONICA
                 {
                     string msg = "Запись и обработка завершена. Сейчас появится графическое изображение вашего голоса.";
                     LogClass.LogWrite(msg);
-                    MessageBox.Show(msg);
+                    //MessageBox.Show(msg);
                 }
                 else
                 {
                     string msg = "Recording and processing completed. A graphic representation of your voice will now appear.";
                     LogClass.LogWrite(msg);
-                    MessageBox.Show(msg);
+                    //MessageBox.Show(msg);
                 }
             }
             catch (Exception ex)
@@ -1403,8 +1401,8 @@ namespace HARMONICA
 
                 if (!Directory.Exists(path + "HARMONICA"))
                 {
-                    Directory.CreateDirectory(path + @"\HARMONICA");
-                    path2 = path + @"\HARMONICA\Data";
+                    Directory.CreateDirectory(path + @"\ReSelf - Mental detox");
+                    path2 = path + @"\ReSelf - Mental detox\Data";
 
                 }
 
@@ -1456,12 +1454,11 @@ namespace HARMONICA
                     }
 
 
-                    Filename = @"HARMONICA\Record\Start.wav";
+                    Filename = @"ReSelf - Mental detox\Record\StartMusic.wav";
                     //btnFeeling_in_the_body.IsEnabled = false;
                     //btnSituation_problem.IsEnabled = false;
                     await Task.Run(() => Sound(Filename));
-                    await Task.Run(() => SoundBack(@"HARMONICA\Record\tunetank.com_471_everest_by_alex-makemusic2.mp3"));
-                    await Task.Delay(18000);
+                    await Task.Delay(19000);
                     if (ShadowClick == 0)
                     {
                         btnFeelingShadow.Opacity = 1;

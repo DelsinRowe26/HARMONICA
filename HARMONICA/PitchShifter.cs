@@ -184,29 +184,6 @@ namespace HARMONICA
 
                     }
 
-                    /*MAX = gAnaMagn[0];
-                    IndexMAX = 0;
-                    for(k = 0; k <= fftFrameSize2; k++)
-                    {
-                        MAX = Math.Max(MAX, gAnaMagn[k]);
-                        MAXIN = PitchShifter1.MAXIN;
-                        coeffVol = MAXIN / MAX;
-                        if (MAXIN > 1.8)
-                        {
-                            gAnaMagn[k] *= coeffVol * 0.9f;
-                        }
-                        else
-                        {
-                            gAnaMagn[k] *= 0;
-                        }
-                    }*/
-
-                    for(k = 0; k <= fftFrameSize; k++)
-                    {
-                        //gFFTworksp[2 * k] *= TembroClass.kt[k];
-                        //gFFTworksp[2 * k + 1] *= TembroClass.kt[k];
-                    }
-
                     /* ***************** PROCESSING ******************* */
                     /* this does the actual pitch shifting/это делает фактическое изменение высоты тона */
 

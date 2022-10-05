@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo-dark.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSCore">
       <HintPath>.\CSCore.dll</HintPath>
@@ -160,6 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="button-turbo-inactive2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Logo-dark.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

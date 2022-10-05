@@ -109,7 +109,7 @@ namespace HARMONICA
                 StreamReader FileLanguage = new StreamReader("Data_Language.tmp");
                 langindex = FileLanguage.ReadToEnd();
                 FileLanguage.Close();
-                path2 = path + @"\HARMONICA\Data";
+                path2 = path + @"\ReSelf - Mental detox\Data";
                 if (langindex == "0")
                 {
                     btnActivation.Content = "Активировать";
