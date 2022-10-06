@@ -25,6 +25,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
@@ -41,6 +42,14 @@ namespace HARMONICA
     /// </summary>
     public partial class MainWindow : Window
     {
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("winmm.dll")]
+        public static extern int waveOutGetVolume(IntPtr hwo, out uint pdwVolume);
+
+        [DllImport("winmm.dll")]
+        public static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
         [DllImport("BiblZvuk.dll", CallingConvention = CallingConvention.Cdecl)]
         //unsafe
@@ -74,6 +83,10 @@ namespace HARMONICA
         private float pitchVal;
         private float reverbVal;
         private static int limit = 10;
+
+        private const int APPCOMMAND_VOLUME_UP = 0xA0000;
+        private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
+        private const int WM_APPCOMMAND = 0x319;
 
         BackgroundWorker worker;
 
@@ -224,15 +237,17 @@ namespace HARMONICA
                 if (SoundClick == 0)
                 {
                     mSoundOut.Initialize(mMp3.ToWaveSource(32).ToMono());
+                    mSoundOut.Volume = 5;
                 }
                 else
                 {
                     mSoundOut.Initialize(mMixer.ToWaveSource(32).ToMono());
+                    mSoundOut.Volume = 15;
                 }
 
 
                 mSoundOut.Play();
-                mSoundOut.Volume = 10;
+                
                 
             }
             catch (Exception ex)
@@ -395,8 +410,6 @@ namespace HARMONICA
             Dispatcher.Invoke(() => lbTimer.Visibility = Visibility.Hidden);
         }
 
-
-
         private void WinTime()
         {
             if(langindex == "0")
@@ -437,14 +450,18 @@ namespace HARMONICA
 
         private void PitchTimerSitProb()
         {
-            int i = 0;
-            while(i < 180)
+            int i = 180;
+            Dispatcher.Invoke(() => lbTimer.Visibility = Visibility.Visible);
+            while (i > 0)
             {
+                Dispatcher.Invoke(() => lbTimer.Content = i.ToString());
                 pitchVal += 0.0083f;
                 SetPitchShiftValue();
-                i++;
                 Thread.Sleep(1000);
+                i--;
             }
+            Dispatcher.Invoke(() => lbTimer.Content = i.ToString());
+            Dispatcher.Invoke(() => lbTimer.Visibility = Visibility.Hidden);
         }
 
         private void PitchTimerFeelInTheBody()
@@ -473,11 +490,18 @@ namespace HARMONICA
                 //Thread.Sleep(2000);
                 btnSituation_problem.IsEnabled = false;
                 btnFeeling_in_the_body.IsEnabled = false;
+                btnSituation_problem.Visibility = Visibility.Hidden;
+                btnFeeling_in_the_body.Visibility = Visibility.Hidden;
                 button.IsEnabled = false;
 
                 Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\HintFeelingInTheBody_StepOneAndTwoFeelingInTheBody.wav";
                 Sound(Filename);
-                await Task.Delay(89000);
+                await Task.Delay(25000);
+                lbText.Content = "переведите внимание на зажатые части\nтела и сделайте оттуда глубокий выдох";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(30000);
+                lbText.Visibility = Visibility.Hidden;
+                await Task.Delay(36000);
                 //Stop();
 
                 /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBodyMusic.wav";
@@ -487,7 +511,7 @@ namespace HARMONICA
 
                 //Здесь должно быть что-то типо включения микрофона!!!!!!! А у нас будет что-то типо записи
                 //WinTime();
-                lbText.Content = "Сейчас начнется запись голоса.";
+                lbText.Content = "Сейчас начнется запись голоса";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
                 Stop();
@@ -499,7 +523,7 @@ namespace HARMONICA
                 Stop();
                 await Task.Delay(2000);
                 //Thread.Sleep(5000);
-
+                lbTitleNFT1.Visibility = Visibility.Visible;
 
                 /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
                 Sound(Filename);
@@ -512,6 +536,7 @@ namespace HARMONICA
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(5000);
                 lbText.Visibility = Visibility.Hidden;
+
                 //Здесь 3 минуты какой-то херни
                 Stop();
                 StartFullDuplex();
@@ -519,21 +544,22 @@ namespace HARMONICA
                 //await Task.Delay(180000);
                 Stop();
 
-                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepFiveFeelingInTheBody.wav";
+                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepFiveFeelingInTheBody_RepeatRecord.wav";
                 Sound(Filename);
-                await Task.Delay(23000);
+                await Task.Delay(36000);
 
-                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\RepeatRecord.wav";
+                /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\RepeatRecord.wav";
                 Sound(Filename);
-                await Task.Delay(12000);
+                await Task.Delay(12000);*/
 
                 //WinTime();
-                lbText.Content = "Сейчас начнется запись голоса.";
+                lbText.Content = "Сейчас начнется запись голоса";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
                 lbText.Visibility = Visibility.Hidden;
                 Recording2();
                 await Task.Delay(7000);
+                lbTitleNFT2.Visibility = Visibility.Visible;
 
                 Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
                 Sound(Filename);
@@ -570,53 +596,78 @@ namespace HARMONICA
                 Stop();
                 btnSituation_problem.IsEnabled = false;
                 btnFeeling_in_the_body.IsEnabled = false;
+                btnSituation_problem.Visibility = Visibility.Hidden;
+                btnFeeling_in_the_body.Visibility = Visibility.Hidden;
                 button.IsEnabled = false;
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\HintSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\HintSituationProblem_StepOneSituationProblem_StepTwoSituationProblem.wav";
                 Sound(Filename);
-                await Task.Run(() => Timer30());
+                await Task.Delay(28000);
+                lbText.Content = "переведите внимание на зажатые части\nтела и сделайте оттуда глубокий выдох";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(30000);
+                lbText.Visibility = Visibility.Hidden;
+                await Task.Delay(36000);
 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepOneSituationProblem2.wav";
+                /*Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepOneSituationProblem.wav";
                 Sound(Filename);
                 await Task.Delay(24000);
 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepTwoSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepTwoSituationProblem.wav";
                 Sound(Filename);
-                await Task.Delay(17000);
+                await Task.Delay(17000);*/
 
-                WinTime();
+                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Visibility = Visibility.Visible;
+                //WinTime();
                 await Task.Run(() => TimerRec());
+                Stop();
+                lbText.Visibility = Visibility.Hidden;
+                await Task.Run(() => StartFullDuplex1());
                 Recording1();
-                await Task.Delay(7000);
+                await Task.Delay(5000);
 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\AfterStepTwoSituationProblem2.wav";
+                Stop();
+                await Task.Delay(2000);
+                //Thread.Sleep(5000);
+                lbTitleNFT1.Visibility = Visibility.Visible;
+
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\AfterStepTwoSituationProblem_StepThreeSituationProblem_StepFourSituationProblem.wav";
                 Sound(Filename);
-                await Task.Delay(7000);
+                await Task.Delay(90000);
+                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(6000);
+                lbText.Visibility = Visibility.Hidden;
 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepThreeSituationProblem2.wav";
+                /*Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepThreeSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(46000);
 
                 Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepFourSituationProblem2.wav";
                 Sound(Filename);
-                await Task.Delay(39000);
+                await Task.Delay(39000);*/
 
                 Stop();
                 StartFullDuplex();
                 await Task.Run(() => PitchTimerSitProb());
                 Stop();
 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepFiveSituationProblem2.wav";
+                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepFiveSituationProblem_RepeatRecord.wav";
                 Sound(Filename);
-                await Task.Delay(24000);
+                await Task.Delay(36000);
 
-                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\RepeatRecord2.wav";
+                /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\RepeatRecord.wav";
                 Sound(Filename);
-                await Task.Delay(12000);
+                await Task.Delay(12000);*/
 
-                WinTime();
+                //WinTime();
+                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
+                lbText.Visibility = Visibility.Hidden;
                 Recording2();
                 await Task.Delay(7000);
+                lbTitleNFT2.Visibility = Visibility.Visible;
 
                 Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
                 Sound(Filename);
@@ -972,6 +1023,54 @@ namespace HARMONICA
                 string uri = @"ReSelf - Mental detox\Button\button-turbo-inactive.png";
                 ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
+        }
+
+        private void btnIncVol_Click(object sender, RoutedEventArgs e)
+        {
+            var wih = new WindowInteropHelper(this);
+            var hWnd = wih.Handle;
+            SendMessageW(hWnd, WM_APPCOMMAND, hWnd, (IntPtr)APPCOMMAND_VOLUME_UP);
+            /*pbVolumeRight.Value += 1310;
+            pbVolumeLeft.Value += 1310;
+            SetVolume();*/
+            string uri = @"ReSelf - Mental detox\Button\button-soundup-active.png";
+            ImgBackIncVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void btnDecVol_Click(object sender, RoutedEventArgs e)
+        {
+            var wih = new WindowInteropHelper(this);
+            var hWnd = wih.Handle;
+            SendMessageW(hWnd, WM_APPCOMMAND, hWnd, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+            /*pbVolumeRight.Value -= 1310;
+            pbVolumeLeft.Value -= 1310;
+            SetVolume();*/
+            string uri = @"ReSelf - Mental detox\Button\button-sounddown-active.png";
+            btnImgDecVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void btnIncVol_MouseMove(object sender, MouseEventArgs e)
+        {
+            string uri = @"ReSelf - Mental detox\Button\button-soundup-hover.png";
+            ImgBackIncVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void btnIncVol_MouseLeave(object sender, MouseEventArgs e)
+        {
+            string uri = @"ReSelf - Mental detox\Button\button-soundup-inactive.png";
+            ImgBackIncVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void btnDecVol_MouseMove(object sender, MouseEventArgs e)
+        {
+            string uri = @"ReSelf - Mental detox\Button\button-sounddown-hover.png";
+            btnImgDecVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+        }
+
+        private void btnDecVol_MouseLeave(object sender, MouseEventArgs e)
+        {
+            string uri = @"ReSelf - Mental detox\Button\button-sounddown-inactive.png";
+            btnImgDecVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void btnSituation_problem_MouseMove(object sender, MouseEventArgs e)

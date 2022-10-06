@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HARMONICA"
-        mc:Ignorable="d" Height="186" Width="329" ResizeMode="NoResize" Topmost="True">
+        mc:Ignorable="d" Height="170" Width="313" ResizeMode="NoResize" Topmost="True">
     <Grid>
         <TextBlock x:Name="tbText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Помогла ли вам программа?" VerticalAlignment="Top" Height="72" Width="287" FontWeight="Bold" FontSize="16">
             <TextBlock.Foreground>

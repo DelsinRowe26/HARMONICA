@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Logo-dark.ico</ApplicationIcon>
+    <ApplicationIcon>reselg-logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSCore">
@@ -166,6 +166,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Logo-dark.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="button-back-volume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="button-soundup-inactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="button-sounddown-inactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="reselg-logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

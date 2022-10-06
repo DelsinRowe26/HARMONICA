@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARMONICA", "HARMONICA\HARM
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ReSelf - Mental detox v.1.0.0.0 Setup", "ReSelf - Mental detox v.1.0.0.0 Setup\ReSelf - Mental detox v.1.0.0.0 Setup.vdproj", "{4FFCF799-F3FF-40CE-841F-FCE957091965}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Update ReSelf - Mental detox v.1.0.0.0 Setup", "Update ReSelf - Mental detox v.1.0.0.0 Setup\Update ReSelf - Mental detox v.1.0.0.0 Setup.vdproj", "{DEA538B2-0789-41F3-80C1-7CB092BEA4DE}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Update ReSelf - Mental detox v.1.0.0.1 Setup", "Update ReSelf - Mental detox v.1.0.0.1 Setup\Update ReSelf - Mental detox v.1.0.0.1 Setup.vdproj", "{BEE1694C-3B02-4E22-86AB-68CFC12A3514}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,10 @@ Global
 		{F8214F57-3E1C-445B-9375-280A9E4E986C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FFCF799-F3FF-40CE-841F-FCE957091965}.Debug|Any CPU.ActiveCfg = Debug
 		{4FFCF799-F3FF-40CE-841F-FCE957091965}.Release|Any CPU.ActiveCfg = Release
+		{DEA538B2-0789-41F3-80C1-7CB092BEA4DE}.Debug|Any CPU.ActiveCfg = Debug
+		{DEA538B2-0789-41F3-80C1-7CB092BEA4DE}.Release|Any CPU.ActiveCfg = Release
+		{BEE1694C-3B02-4E22-86AB-68CFC12A3514}.Debug|Any CPU.ActiveCfg = Debug
+		{BEE1694C-3B02-4E22-86AB-68CFC12A3514}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

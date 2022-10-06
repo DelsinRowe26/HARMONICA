@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HARMONICA"
         mc:Ignorable="d"
-        Title="ReSelf - Mental detox" Height="602" Width="800" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing">
+        Title="ReSelf - Mental detox" Height="602" Width="910" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing" Icon="/reselg-logo.ico">
     <Window.Background>
         <ImageBrush ImageSource="/32547346-f758-4436-9811-3a4aca09ae1d.png"/>
     </Window.Background>
     <Grid>
-        <Button x:Name="btnFeeling_in_the_body" Content="Button" HorizontalAlignment="Left" Margin="182,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Feeling in the body»" Click="btnFeeling_in_the_body_Click" Foreground="{x:Null}" BorderBrush="{x:Null}" MouseMove="btnFeeling_in_the_body_MouseMove" MouseLeave="btnFeeling_in_the_body_MouseLeave">
+        <Button x:Name="btnFeeling_in_the_body" Content="Button" HorizontalAlignment="Left" Margin="196,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Feeling in the body»" Click="btnFeeling_in_the_body_Click" Foreground="{x:Null}" BorderBrush="{x:Null}" MouseMove="btnFeeling_in_the_body_MouseMove" MouseLeave="btnFeeling_in_the_body_MouseLeave">
             <Button.Background>
                 <ImageBrush x:Name="ImgBtnFeelingInTheBody" ImageSource="/button-turbo-inactive.png"/>
             </Button.Background>
@@ -23,7 +23,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="btnSituation_problem" Content="Button" HorizontalAlignment="Left" Margin="543,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Situation/problem»&#xA;Good. You have chosen a session during which you will be able to&#xA;work through a problem or situation in your life in order to resolve it at the deepest level.&#xA;Please take a comfortable position. Feel your whole body.&#xA;Relax as you exhale those places where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes if that makes you feel more comfortable. We start the session." Click="btnSituation_problem_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" MouseMove="btnSituation_problem_MouseMove" MouseLeave="btnSituation_problem_MouseLeave">
+        <Button x:Name="btnSituation_problem" Content="Button" HorizontalAlignment="Left" Margin="643,466,0,0" VerticalAlignment="Top" Width="62" Height="62" ToolTip="Session «Situation/problem»&#xA;Good. You have chosen a session during which you will be able to&#xA;work through a problem or situation in your life in order to resolve it at the deepest level.&#xA;Please take a comfortable position. Feel your whole body.&#xA;Relax as you exhale those places where you noticed tension (calm music plays - 30 seconds).&#xA;Close your eyes if that makes you feel more comfortable. We start the session." Click="btnSituation_problem_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" MouseMove="btnSituation_problem_MouseMove" MouseLeave="btnSituation_problem_MouseLeave">
             <Button.Background>
                 <ImageBrush x:Name="ImgBtnSolutionProblem" ImageSource="/button-turbo-inactive2.png"/>
             </Button.Background>
@@ -36,7 +36,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TabControl x:Name="tabNFTSet" Margin="88,135,442,172" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Width="270">
+        <TabControl x:Name="tabNFTSet" Margin="101,135,539,172" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Width="270">
             <TabItem x:Name="TabNFT" Header="gNeuro NFT" Background="{x:Null}" BorderBrush="{x:Null}" Margin="46,-2,-50,0" Visibility="Hidden">
                 <Grid x:Name="GridName" Width="230" Margin="7,0,8,0" Height="230">
                     <Grid.ColumnDefinitions>
@@ -76,7 +76,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <TabControl x:Name="tabNFT" Margin="439,135,91,172" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Width="270">
+        <TabControl x:Name="tabNFT" Margin="480,135,160,172" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Width="270">
             <TabItem x:Name="TabNFT1" Header="gNeuro NFT" Background="{x:Null}" BorderBrush="{x:Null}" Margin="46,-2,-50,0" Visibility="Hidden">
                 <Grid x:Name="GridName1" Width="230" Margin="7,0,8,0" Height="230">
                     <Grid.ColumnDefinitions>
@@ -120,7 +120,7 @@
                 </LinearGradientBrush>
             </Label.Foreground>
         </Label>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="682,20,0,0" VerticalAlignment="Top" Width="62" Height="62" Foreground="{x:Null}" BorderBrush="{x:Null}" MouseMove="button_MouseMove" MouseLeave="button_MouseLeave" Click="button_Click">
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="780,20,0,0" VerticalAlignment="Top" Width="62" Height="62" Foreground="{x:Null}" BorderBrush="{x:Null}" MouseMove="button_MouseMove" MouseLeave="button_MouseLeave" Click="button_Click">
             <Button.Background>
                 <ImageBrush x:Name="ImgBtnSettings" ImageSource="/button-settings-inactive.png"/>
             </Button.Background>
@@ -141,6 +141,47 @@
             </Label.Foreground>
         </Label>
         <Label x:Name="lbText" Content="0" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="20" Visibility="Hidden">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF100B7"/>
+                    <GradientStop Color="#FF8D00FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Image x:Name="imgBackVolume" HorizontalAlignment="Left" Height="103" Margin="790,224,0,0" VerticalAlignment="Top" Width="54" Source="/button-back-volume.png">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="/button-back-volume.png"/>
+            </Image.OpacityMask>
+        </Image>
+        <Button x:Name="btnIncVol" Content="Button" HorizontalAlignment="Left" Margin="790,224,0,0" VerticalAlignment="Top" Width="52" Height="52" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="btnIncVol_Click" MouseMove="btnIncVol_MouseMove" MouseLeave="btnIncVol_MouseLeave">
+            <Button.Background>
+                <ImageBrush x:Name="ImgBackIncVol" ImageSource="/button-soundup-inactive.png"/>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" Width="52" Height="52"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="btnDecVol" Content="Button" HorizontalAlignment="Left" Margin="790,275,0,0" VerticalAlignment="Top" Width="52" Height="52" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="btnDecVol_Click" MouseMove="btnDecVol_MouseMove" MouseLeave="btnDecVol_MouseLeave">
+            <Button.Background>
+                <ImageBrush x:Name="btnImgDecVol" ImageSource="/button-sounddown-inactive.png"/>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" Width="52" Height="52"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Label x:Name="lbTitleNFT1" Content="Первое визуальное&#xA;изображение голоса" HorizontalAlignment="Left" Margin="160,100,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14" Visibility="Hidden">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF100B7"/>
+                    <GradientStop Color="#FF8D00FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Label x:Name="lbTitleNFT2" Content="Второе визуальное&#xA;изображение голоса" HorizontalAlignment="Left" Margin="539,100,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14" Visibility="Hidden">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF100B7"/>
