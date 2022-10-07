@@ -64,6 +64,9 @@
     </ApplicationDefinition>
     <Compile Include="ActivationForm.xaml.cs" />
     <Compile Include="check.cs" />
+    <Compile Include="ChoiceView.xaml.cs">
+      <DependentUpon>ChoiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormUpload.cs" />
     <Compile Include="Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
@@ -79,6 +82,9 @@
     </Compile>
     <Compile Include="PitchShifter.cs" />
     <Compile Include="PitchShifterPitch.cs" />
+    <Compile Include="Repeat.xaml.cs">
+      <DependentUpon>Repeat.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SampleDSP.cs" />
     <Compile Include="SampleDSPPitch.cs" />
     <Compile Include="SimpleMixer.cs" />
@@ -87,6 +93,10 @@
     <Page Include="ActivationForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Help.xaml">
       <SubType>Designer</SubType>
@@ -113,6 +123,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MessageBoxSpeak.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Repeat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

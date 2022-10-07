@@ -77,6 +77,7 @@ namespace HARMONICA
         string myfile;
         string cutmyfile;
         private string Filename;
+        private string Session;
 
         private int ImgBtnTurboClick = 0, ImgBtnTurboTwoClick = 0, BtnSetClick = 0, ShadowClick = 0, SoundClick = 0;
         private int SampleRate;
@@ -561,6 +562,10 @@ namespace HARMONICA
                 await Task.Delay(7000);
                 lbTitleNFT2.Visibility = Visibility.Visible;
 
+                Repeat repeat = new Repeat();
+                repeat.ShowDialog();
+                await Task.Delay(10000);
+
                 Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
                 Sound(Filename);
                 HelpUnhelp help = new HelpUnhelp();
@@ -586,6 +591,287 @@ namespace HARMONICA
                 }
             }
         }
+
+        private async void Feeling_in_the_body_Text()
+        {
+            try
+            {
+                ShadowClick = 1;
+                Feeling_in_the_body_pattern();
+                Stop();
+                //Thread.Sleep(2000);
+                btnSituation_problem.IsEnabled = false;
+                btnFeeling_in_the_body.IsEnabled = false;
+                btnSituation_problem.Visibility = Visibility.Hidden;
+                btnFeeling_in_the_body.Visibility = Visibility.Hidden;
+                button.IsEnabled = false;
+
+                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Sound(Filename);
+                lbText.Visibility = Visibility.Visible;
+                
+                lbText.Content = "Хорошо, Вы выбрали сеанс в течение которого сможете";
+                await Task.Delay(5000);
+                
+                lbText.Content = "высвободить отрицательную энергию, почувствовать себя";
+                await Task.Delay(5000);
+
+                lbText.Content = "легче и спокойнее. Пожалуйста, займите удобное положение.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Всецело почувствуйте свое тело.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Расслабьте на выдохе те места,";
+                await Task.Delay(3000);
+
+                lbText.Content = "в которых заметили напряжение.";
+                await Task.Delay(3000);
+
+                lbText.Content = "переведите внимание на зажатые части\nтела и сделайте оттуда глубокий выдох";
+                await Task.Delay(30000);
+
+                lbText.Content = "Закройте глаза. Мы начинаем сеанс.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Шаг первый: подготовка голоса.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Медленно и расслабленно открывайте рот все шире и шире,";
+                await Task.Delay(5000);
+
+                lbText.Content = "чтобы сеанс получился максимально эффективным.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Шаг второй: сохраняя открытое положение рта";
+                await Task.Delay(5000);
+
+                lbText.Content = "- потяните долгий звук «ААА» и вслушайтесь\nв звучание своего голоса в наушниках.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Run(() => TimerRec());
+                Stop();
+                lbText.Visibility = Visibility.Hidden;
+                await Task.Run(() => StartFullDuplex1());
+                Recording1();
+                await Task.Delay(5000);
+
+                Stop();
+                await Task.Delay(2000);
+                //Thread.Sleep(5000);
+                lbTitleNFT1.Visibility = Visibility.Visible;
+                lbText.Visibility = Visibility.Visible;
+
+                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Sound(Filename);
+
+                lbText.Content = "Хорошо. Голос может звучать свободно и открыто.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Шаг третий: переведите все свое внимание на ту область";
+                await Task.Delay(5000);
+
+                lbText.Content = "тела, где ощущается боль/тревога, напряжение или другие";
+                await Task.Delay(5000);
+
+                lbText.Content = "неприятные переживания. Сфокусируйтесь на этом месте";
+                await Task.Delay(5000);
+
+                lbText.Content = "так хорошо, насколько это возможно.";
+                await Task.Delay(9000);
+
+                lbText.Content = "Шаг четвертый: начните тянуть долгий звук,";
+                await Task.Delay(4000);
+
+                lbText.Content = "продолжая фокусироваться на выбранной области.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Ваш голос станет специальным каналом";
+                await Task.Delay(5000);
+
+                lbText.Content = "для вывода негативного ощущения из тела.";
+                await Task.Delay(5000);
+
+                lbText.Content = "В течение всего сеанса программа настроит его таким образом,";
+                await Task.Delay(5000);
+
+                lbText.Content = "чтобы сеанс прошел для Вас с максимальной пользой.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Время сеанса составит 3 минуты,";
+                await Task.Delay(3000);
+
+                lbText.Content = "после чего программа автоматически остановит его.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Пожалуйста, начинайте.";
+                await Task.Delay(2000);
+
+                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(2000);
+                lbText.Visibility = Visibility.Hidden;
+
+                //Здесь 3 минуты какой-то херни
+                Stop();
+                StartFullDuplex();
+                await Task.Run(() => PitchTimerFeelInTheBody());
+                //await Task.Delay(180000);
+                Stop();
+
+                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Sound(Filename);
+
+                lbText.Visibility = Visibility.Visible;
+                lbText.Content = "Шаг пятый:Сеанс окончен.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Проанализируйте свои ощущения.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Насколько Вам стало легче.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Оцените эффективность сеанса в целом.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Подумайте о том, достаточно этого сеанса,";
+                await Task.Delay(4000);
+
+                lbText.Content = "или требуется еще один или несколько.";
+                await Task.Delay(4000);
+
+                lbText.Content = "Всего наилучшего, аутотренинг окончен.";
+                await Task.Delay(4000);
+
+                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(4000);
+
+                Stop();
+
+                await Task.Run(() => TimerRec());
+                lbText.Visibility = Visibility.Hidden;
+                Recording2();
+                await Task.Delay(7000);
+                lbTitleNFT2.Visibility = Visibility.Visible;
+
+                Repeat repeat = new Repeat();
+                repeat.ShowDialog();
+                await Task.Delay(10000);
+
+                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                Sound(Filename);
+
+                HelpUnhelp help = new HelpUnhelp();
+                help.ShowDialog();
+                await Task.Delay(140000);
+                Close();
+
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в Feeling_in_the_body_Text: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in Feeling_in_the_body_Text: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+        }
+
+        private async void StraightawaySession()
+        {
+            try
+            {
+                ShadowClick = 1;
+                if (Session == "Feel")
+                {
+                    Feeling_in_the_body_pattern();
+                }
+                else
+                {
+                    Situation_Problem_pattern();
+                }
+                Stop();
+                btnSituation_problem.IsEnabled = false;
+                btnFeeling_in_the_body.IsEnabled = false;
+                btnSituation_problem.Visibility = Visibility.Hidden;
+                btnFeeling_in_the_body.Visibility = Visibility.Hidden;
+                button.IsEnabled = false;
+
+                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+                await Task.Run(() => TimerRec());
+                //Stop();
+                lbText.Visibility = Visibility.Hidden;
+                //await Task.Run(() => StartFullDuplex1());
+                Recording1();
+                await Task.Delay(7000);
+                lbTitleNFT1.Visibility = Visibility.Visible;
+
+                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(5000);
+                lbText.Visibility = Visibility.Hidden;
+
+                //Здесь 3 минуты какой-то херни
+                //Stop();
+                StartFullDuplex();
+                await Task.Run(() => PitchTimerFeelInTheBody());
+                //await Task.Delay(180000);
+                Stop();
+
+                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(4000);
+                await Task.Run(() => TimerRec());
+                lbText.Visibility = Visibility.Hidden;
+                Recording2();
+                await Task.Delay(7000);
+                lbTitleNFT2.Visibility = Visibility.Visible;
+
+                Repeat repeat = new Repeat();
+                repeat.ShowDialog();
+                await Task.Delay(10000);
+
+                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                Sound(Filename);
+
+                HelpUnhelp help = new HelpUnhelp();
+                help.ShowDialog();
+                await Task.Delay(140000);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в StraightawaySession: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in StraightawaySession: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+        }//NEEEEEEEEEEEEEEEEEEEEEEEEEEED
 
         private async void Situation_problem()
         {
@@ -695,6 +981,201 @@ namespace HARMONICA
             }
         }
 
+        private async void Situation_problem_Text()
+        {
+            try
+            {
+                ShadowClick = 1;
+                Situation_Problem_pattern();
+                Stop();
+                btnSituation_problem.IsEnabled = false;
+                btnFeeling_in_the_body.IsEnabled = false;
+                btnSituation_problem.Visibility = Visibility.Hidden;
+                btnFeeling_in_the_body.Visibility = Visibility.Hidden;
+                button.IsEnabled = false;
+                lbText.Visibility = Visibility.Visible;
+
+                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Sound(Filename);
+
+                lbText.Content = "Хорошо. Вы выбрали сеанс в течение которого сможете";
+                await Task.Delay(5000);
+
+                lbText.Content = "проработать проблему или ситуацию в Вашей жизни,";
+                await Task.Delay(5000);
+
+                lbText.Content = "чтобы разрешить ее на самом глубинном уровне.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Пожалуйста, займите удобное положение.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Всецело почувствуйте свое тело.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Расслабьте на выдохе те места,";
+                await Task.Delay(3000);
+
+                lbText.Content = "в которых заметили напряжение.";
+                await Task.Delay(3000);
+
+                lbText.Content = "переведите внимание на зажатые части\nтела и сделайте оттуда глубокий выдох";
+                await Task.Delay(30000);
+
+                lbText.Content = "Закройте глаза, если так будет комфортнее. Мы начинаем сеанс.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Шаг первый: подготовка голоса.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Медленно и расслабленно открывайте рот все шире и шире,";
+                await Task.Delay(5000);
+
+                lbText.Content = "чтобы сеанс получился максимально эффективным.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Шаг второй: сохраняя открытое положение рта";
+                await Task.Delay(5000);
+
+                lbText.Content = "- потяните долгий звук «ААА» и вслушайтесь\nв звучание своего голоса в наушниках.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Run(() => TimerRec());
+                Stop();
+                lbText.Visibility = Visibility.Hidden;
+                await Task.Run(() => StartFullDuplex1());
+                Recording1();
+                await Task.Delay(5000);
+
+                Stop();
+
+                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Sound(Filename);
+
+                lbText.Visibility = Visibility.Visible;
+                lbText.Content = "Хорошо. Голос может звучать свободно и открыто.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Шаг третий: представьте ситуацию, с которой\nвы будете работать прямо перед собой,";
+                await Task.Delay(5000);
+
+                lbText.Content = "в самом ее драматическом варианте,";
+                await Task.Delay(3000);
+
+                lbText.Content = "даже если это неприятно Вам.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Для того, чтобы ее решить Вашему сознанию\nтребуется точно на ней сфокусироваться.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Чем реалистичнее Вы сможете перенести\nсвое внимание в эту проблему,";
+                await Task.Delay(5000);
+
+                lbText.Content = "тем эффективнее получится самотерапия.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Итак, максимально представьте проблему перед собой.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Это может быть один образ или целый\nряд образов сменяющих друг друга.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Шаг четвертый: начните тянуть долгий звук, продолжая\nфокусироваться на проблемном образе.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Ваш голос станет мощным инструментом нейтрализации проблемы.";
+                await Task.Delay(5000);
+
+                lbText.Content = "В течение всего сеанса программа настроит его таким образом,";
+                await Task.Delay(5000);
+
+                lbText.Content = "чтобы сеанс прошел для Вас с максимальной пользой.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Направьте свой голос прямо в этот образ.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Время сеанса составит 3 минуты,";
+                await Task.Delay(5000);
+
+                lbText.Content = "после чего программа автоматически остановит его.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Пожалуйста, начинайте.";
+                await Task.Delay(3000);
+
+                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Delay(5000);
+                lbText.Visibility = Visibility.Hidden;
+
+                Stop();
+                StartFullDuplex();
+                await Task.Run(() => PitchTimerSitProb());
+                Stop();
+
+                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Sound(Filename);
+
+                lbText.Visibility = Visibility.Visible;
+                lbText.Content = "Сеанс окончен. Проанализируйте свои ощущения.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Насколько Вам стало легче. Оцените эффективность сеанса в целом.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Подумайте о том, достаточно этого сеанса,";
+                await Task.Delay(3000);
+
+                lbText.Content = "или требуется еще один или несколько.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Всего наилучшего, аутотренинг окончен.";
+                await Task.Delay(5000);
+
+                Stop();
+
+                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Visibility = Visibility.Visible;
+                await Task.Run(() => TimerRec());
+                lbText.Visibility = Visibility.Hidden;
+                Recording2();
+                await Task.Delay(7000);
+                lbTitleNFT2.Visibility = Visibility.Visible;
+
+                Repeat repeat = new Repeat();
+                repeat.ShowDialog();
+                await Task.Delay(10000);
+
+                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                Sound(Filename);
+                HelpUnhelp help = new HelpUnhelp();
+                help.ShowDialog();
+                await Task.Delay(140000);
+                Close();
+
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в Situation_problem_Text: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in Situation_problem_Text: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+        }
+
         private void Stop()
         {
             try
@@ -776,7 +1257,10 @@ namespace HARMONICA
         {
             ImgBtnTurboClick = 1;
             btnSituationShadow.Opacity = 0;
-            Feeling_in_the_body();
+            Session = "Feel";
+            ChoiceView view = new ChoiceView();
+            view.ShowDialog();
+            //Feeling_in_the_body();
         }
 
         private async void StartFullDuplex()//запуск пича и громкости
@@ -1002,7 +1486,10 @@ namespace HARMONICA
         {
             ImgBtnTurboTwoClick = 1;
             btnFeelingShadow.Opacity = 0;
-            Situation_problem();
+            Session = "Sit";
+            ChoiceView view = new ChoiceView();
+            view.ShowDialog();
+            //Situation_problem();
         }
 
         private void btnFeeling_in_the_body_MouseMove(object sender, MouseEventArgs e)
@@ -1072,6 +1559,63 @@ namespace HARMONICA
             string uri = @"ReSelf - Mental detox\Button\button-sounddown-inactive.png";
             btnImgDecVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
+
+        private void HARMONICA_Activated(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Repeat.repeat == "Yes")
+                {
+                    if (Session == "Feel")
+                    {
+                        if (ChoiceView.View == "AudioGid")
+                        {
+                            Feeling_in_the_body();
+                        }
+                        else if (ChoiceView.View == "Text")
+                        {
+                            Feeling_in_the_body_Text();
+                        }
+                        else if (ChoiceView.View == "Straightaway")
+                        {
+                            StraightawaySession();
+                        }
+                    }
+                    else if (Session == "Sit")
+                    {
+                        if (ChoiceView.View == "AudioGid")
+                        {
+                            Situation_problem();
+                        }
+                        else if (ChoiceView.View == "Text")
+                        {
+                            Situation_problem_Text();
+                        }
+                        else if (ChoiceView.View == "Straightaway")
+                        {
+                            StraightawaySession();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (langindex == "0")
+                {
+                    string msg = "Ошибка в Activated: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+                else
+                {
+                    string msg = "Error in Activated: \r\n" + ex.Message;
+                    LogClass.LogWrite(msg);
+                    MessageBox.Show(msg);
+                    Debug.WriteLine(msg);
+                }
+            }
+        }//NEEEEEEEEEEEED
 
         private void btnSituation_problem_MouseMove(object sender, MouseEventArgs e)
         {
