@@ -493,7 +493,7 @@ namespace HARMONICA
                 btnFeeling_in_the_body.IsEnabled = false;
                 btnSituation_problem.Visibility = Visibility.Hidden;
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
-                button.IsEnabled = false;
+                // button.IsEnabled = false;
 
                 Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\HintFeelingInTheBody_StepOneAndTwoFeelingInTheBody.wav";
                 Sound(Filename);
@@ -604,7 +604,7 @@ namespace HARMONICA
                 btnFeeling_in_the_body.IsEnabled = false;
                 btnSituation_problem.Visibility = Visibility.Hidden;
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
-                button.IsEnabled = false;
+                //button.IsEnabled = false;
 
                 Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
                 Sound(Filename);
@@ -808,7 +808,7 @@ namespace HARMONICA
                 btnFeeling_in_the_body.IsEnabled = false;
                 btnSituation_problem.Visibility = Visibility.Hidden;
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
-                button.IsEnabled = false;
+                //button.IsEnabled = false;
 
                 lbText.Content = "Сейчас начнется запись голоса";
                 lbText.Visibility = Visibility.Visible;
@@ -884,7 +884,8 @@ namespace HARMONICA
                 btnFeeling_in_the_body.IsEnabled = false;
                 btnSituation_problem.Visibility = Visibility.Hidden;
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
-                button.IsEnabled = false;
+                //button.IsEnabled = false;
+                
                 Filename = @"ReSelf - Mental detox\Record\Situation_problem\HintSituationProblem_StepOneSituationProblem_StepTwoSituationProblem.wav";
                 Sound(Filename);
                 await Task.Delay(28000);
@@ -992,7 +993,7 @@ namespace HARMONICA
                 btnFeeling_in_the_body.IsEnabled = false;
                 btnSituation_problem.Visibility = Visibility.Hidden;
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
-                button.IsEnabled = false;
+                //button.IsEnabled = false;
                 lbText.Visibility = Visibility.Visible;
 
                 Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
@@ -1566,8 +1567,10 @@ namespace HARMONICA
             {
                 if (Repeat.repeat == "Yes")
                 {
+                    
                     if (Session == "Feel")
                     {
+                        Repeat.repeat = "No";
                         if (ChoiceView.View == "AudioGid")
                         {
                             Feeling_in_the_body();
@@ -1583,6 +1586,7 @@ namespace HARMONICA
                     }
                     else if (Session == "Sit")
                     {
+                        Repeat.repeat = "No";
                         if (ChoiceView.View == "AudioGid")
                         {
                             Situation_problem();
