@@ -83,7 +83,7 @@ namespace HARMONICA
         private int SampleRate;
         private float pitchVal;
         private float reverbVal;
-        private static int limit = 10;
+        private static int limit = 20;
 
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
@@ -895,14 +895,6 @@ namespace HARMONICA
                 lbText.Visibility = Visibility.Hidden;
                 await Task.Delay(36000);
 
-                /*Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepOneSituationProblem.wav";
-                Sound(Filename);
-                await Task.Delay(24000);
-
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepTwoSituationProblem.wav";
-                Sound(Filename);
-                await Task.Delay(17000);*/
-
                 lbText.Content = "Сейчас начнется запись голоса";
                 lbText.Visibility = Visibility.Visible;
                 //WinTime();
@@ -1051,6 +1043,7 @@ namespace HARMONICA
                 await Task.Delay(5000);
 
                 Stop();
+                lbTitleNFT1.Visibility = Visibility.Visible;
 
                 Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
                 Sound(Filename);
@@ -1366,17 +1359,10 @@ namespace HARMONICA
         {
             try
             {
-                //StreamReader FileRecord = new StreamReader("Data_Create.tmp");
-                //StreamReader FileCutRecord = new StreamReader("Data_cutCreate.tmp");
-                //myfile = FileRecord.ReadToEnd();
-                //cutmyfile = FileCutRecord.ReadToEnd();
-                //NFTRecordClick = 1;
                 myfile = "MyRecord1.wav";
                 cutmyfile = "cutMyRecord1.wav";
                 fileDeleteRec1 = myfile;
                 fileDeleteCutRec1 = cutmyfile;
-                //FileRecord.Close();
-                //FileCutRecord.Close();
                 if (File.Exists(myfile))
                 {
                     File.Delete(myfile);
@@ -1429,39 +1415,24 @@ namespace HARMONICA
                         pbRecord.Visibility = Visibility.Hidden;
 
                     }
-                    Thread.Sleep(100);
+                    Thread.Sleep(1000);
                     string uri = @"ReSelf - Mental detox\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     int[] Rdat = new int[150000];
                     int Ndt;
                     Ndt = vizualzvuk(cutmyfile, myfile, Rdat, 1);
-                    NFT_drawing1(myfile);
-                    //File.Move(myfile, @"Record\" + myfile);
-                    //CutRecord cutRecord = new CutRecord();
-                    //cutRecord.CutFromWave(cutmyfile, myfile, start, end);
+                    NFT_drawing1(myfile); 
 
                 }
                 if (langindex == "0")
                 {
-                    //ImgBtnRecordClick = 0;
-                    //string uri = @"Neurotuners\button\button-record-inactive.png";
-                    //ImgRecordingBtn.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     string msg = "Запись и обработка завершена. Сейчас появится графическое изображение вашего голоса.";
                     LogClass.LogWrite(msg);
-                    //MessageBox.Show(msg);
-                    //btnPlayerEffect.Opacity = 1;
-                    //WinSkip skip = new WinSkip();
-                    //skip.ShowDialog();
                 }
                 else
                 {
-                    //string uri = @"Neurotuners\button\button-record-inactive.png";
-                    //ImgRecordingBtn.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
-                    //btnPlayer.IsEnabled = true;
                     string msg = "Recording and processing completed. A graphic representation of your voice will now appear.";
                     LogClass.LogWrite(msg);
-                    //MessageBox.Show(msg);
-                    //btnPlayerEffect.Opacity = 1;
                 }
             }
             catch (Exception ex)
