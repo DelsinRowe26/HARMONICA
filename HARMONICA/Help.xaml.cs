@@ -50,13 +50,13 @@ namespace HARMONICA
         {
             if(HelpUnhelp.HelpUnhelpClick == 1)
             {
-                lbComment.Content = "Оставьте свой отзыв";
+                lbComment.Content = "Please leave your feedback";
                 btnVK.Visibility = Visibility.Visible;
                 btnTelegram.Visibility = Visibility.Visible;
             }
             else if(HelpUnhelp.HelpUnhelpClick == 2)
             {
-                lbComment.Content = "Если вы хотите разобраться\nпочему вам не помгло,\nоставьте заявку\nмы с вами свяжемся";
+                lbComment.Content = "If you want to understand\nwhy you did not feel\nthe effect,\nplease leave a request,\nwe will contact you";
                 btnVK.Visibility = Visibility.Hidden;
             }
         }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MessageBoxSpeak" Height="200" Width="480" Closing="Window_Closing" Loaded="Window_Loaded" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock x:Name="tbTextSpeak" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Подключите проводную аудио-гарнитуру к компьютеру. Если на данный момент гарнитура не подключена, то подключите проводную гарнитуру, и перезапустите программу для того, чтобы звук подавался в наушники." VerticalAlignment="Top" Height="130" Width="413" FontSize="16" FontWeight="Bold">
+        <TextBlock x:Name="tbTextSpeak" HorizontalAlignment="Center" TextWrapping="Wrap" Text="     Please connect a wired audio headset to your computer. If the headset is not currently connected,&#xA;  connect a wired headset and restart the program." VerticalAlignment="Center" Height="130" Width="412" FontSize="16" FontWeight="Bold">
             <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF100B7"/>

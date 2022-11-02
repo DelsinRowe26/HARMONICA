@@ -23,7 +23,7 @@
                 </LinearGradientBrush>
             </Button.Foreground>
         </Button>
-        <Label x:Name="lbComment" Content="Оставьте свой отзыв" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="240" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16" Height="124">
+        <Label x:Name="lbComment" Content="Please leave your feedback" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="240" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16" Height="124">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF100B7"/>

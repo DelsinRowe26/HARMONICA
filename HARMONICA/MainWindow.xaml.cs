@@ -40,12 +40,13 @@ namespace HARMONICA
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    /// English Version
     public partial class MainWindow : Window
     {
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
-        [DllImport("winmm.dll")]
+        [DllImport("winmm.dll")]//iojoijoijiojojoijioj
         public static extern int waveOutGetVolume(IntPtr hwo, out uint pdwVolume);
 
         [DllImport("winmm.dll")]
@@ -59,6 +60,7 @@ namespace HARMONICA
         private FileInfo fileInfo1 = new FileInfo("Data_Load.tmp");
         private FileInfo FileLanguage = new FileInfo("Data_Language.tmp");
         private FileInfo fileinfo = new FileInfo("DataTemp.tmp");
+        private int st;
 
         private MMDeviceCollection mOutputDevices;
         private MMDeviceCollection mInputDevices;
@@ -83,7 +85,7 @@ namespace HARMONICA
         private int SampleRate;
         private float pitchVal;
         private float reverbVal;
-        private static int limit = 20;
+        private static int limit = 10;
 
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
@@ -320,7 +322,7 @@ namespace HARMONICA
                 }
                 else
                 {
-                    Title = "ReSelf - Mental detox";
+                    Title = "G-Neuro cybernetics";
                     lbMicrophone.Content = "Microphone selection";
                     lbSpeaker.Content = "Speaker selection";
                     lbRecordPB.Content = "Recording in progress...";
@@ -429,7 +431,7 @@ namespace HARMONICA
         private void Situation_Problem_pattern()
         {
             TembroClass tembro = new TembroClass();
-            string PathFile = @"ReSelf - Mental detox\Record\Situation_problem\LiftUp Effect.tmp";
+            string PathFile = @"G-Neuro cybernetics\Record\Situation_problem\LiftUp Effect.tmp";
             tembro.Tembro(SampleRate, PathFile);
             pitchVal = 0;
             reverbVal = 250;
@@ -438,7 +440,7 @@ namespace HARMONICA
         private void Feeling_in_the_body_pattern()
         {
             TembroClass tembro = new TembroClass();
-            string PathFile = @"ReSelf - Mental detox\Record\Feeling_in_the_body\Wide_voiceMan.tmp";
+            string PathFile = @"G-Neuro cybernetics\Record\Feeling_in_the_body\Wide_voiceMan.tmp";
             tembro.Tembro(SampleRate, PathFile);
             pitchVal = 0;
             reverbVal = 150;
@@ -495,24 +497,24 @@ namespace HARMONICA
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
                 // button.IsEnabled = false;
 
-                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\HintFeelingInTheBody_StepOneAndTwoFeelingInTheBody.wav";
+                Filename = @"G-Neuro cybernetics\Record\Feeling_in_the_body\HintFeelingInTheBody_StepOneAndTwoFeelingInTheBodyEn.wav";
                 Sound(Filename);
-                await Task.Delay(25000);
-                lbText.Content = "переведите внимание на зажатые части\nтела и сделайте оттуда глубокий выдох";
+                await Task.Delay(22000);
+                lbText.Content = "Shift your attention to the clamped parts\nof your body and exhale deeply from there";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(30000);
                 lbText.Visibility = Visibility.Hidden;
-                await Task.Delay(36000);
+                await Task.Delay(28000);
                 //Stop();
 
-                /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBodyMusic.wav";
+                /*Filename = @"G-Neuro cybernetics\Record\Feeling_in_the_body\StepOneAndTwoFeelingInTheBodyMusic.wav";
                 Sound(Filename);
                 await Task.Delay(34000);*/
                 
 
                 //Здесь должно быть что-то типо включения микрофона!!!!!!! А у нас будет что-то типо записи
                 //WinTime();
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
                 Stop();
@@ -526,14 +528,14 @@ namespace HARMONICA
                 //Thread.Sleep(5000);
                 lbTitleNFT1.Visibility = Visibility.Visible;
 
-                /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
+                /*Filename = @"G-Neuro cybernetics\Record\Feeling_in_the_body\StepThreeFeelingInTheBody.wav";
                 Sound(Filename);
                 await Task.Delay(32000);*/
 
-                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepThreeFeelingInTheBody_StepFourFeelingInTheBody.wav";
+                Filename = @"G-Neuro cybernetics\Record\Feeling_in_the_body\StepThreeFeelingInTheBody_StepFourFeelingInTheBodyEn.wav";
                 Sound(Filename);
                 await Task.Delay(63000);
-                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Content = "LET'S START THE SESSION!";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(5000);
                 lbText.Visibility = Visibility.Hidden;
@@ -545,16 +547,19 @@ namespace HARMONICA
                 //await Task.Delay(180000);
                 Stop();
 
-                Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\StepFiveFeelingInTheBody_RepeatRecord.wav";
+                Filename = @"G-Neuro cybernetics\Record\Feeling_in_the_body\StepFiveFeelingInTheBodyEn.wav";
                 Sound(Filename);
-                await Task.Delay(36000);
+                await Task.Delay(18000);
 
-                /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\RepeatRecord.wav";
+                /*Filename = @"G-Neuro cybernetics\Record\Feeling_in_the_body\RepeatRecord.wav";
                 Sound(Filename);
                 await Task.Delay(12000);*/
 
+                //lbText.Content = "Get ready, the second voice recording is about to begin";
+                //await Task.Delay(7000);
+
                 //WinTime();
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
                 lbText.Visibility = Visibility.Hidden;
@@ -566,7 +571,7 @@ namespace HARMONICA
                 repeat.ShowDialog();
                 await Task.Delay(10000);
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
                 Sound(Filename);
                 HelpUnhelp help = new HelpUnhelp();
                 help.ShowDialog();
@@ -606,50 +611,41 @@ namespace HARMONICA
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
                 //button.IsEnabled = false;
 
-                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Filename = @"G-Neuro cybernetics\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
                 Sound(Filename);
                 lbText.Visibility = Visibility.Visible;
                 
-                lbText.Content = "Хорошо, Вы выбрали сеанс в течение которого сможете";
+                lbText.Content = "Ok, you have chosen a session during which you can";
                 await Task.Delay(5000);
                 
-                lbText.Content = "высвободить отрицательную энергию, почувствовать себя";
+                lbText.Content = "release the negative energy. Please get into";
                 await Task.Delay(5000);
 
-                lbText.Content = "легче и спокойнее. Пожалуйста, займите удобное положение.";
+                lbText.Content = "a comfortable position. Fully feel your body.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Всецело почувствуйте свое тело.";
-                await Task.Delay(3000);
+                lbText.Content = "Relax. Close your eyes. We are starting.";
+                await Task.Delay(5000);
 
-                lbText.Content = "Расслабьте на выдохе те места,";
-                await Task.Delay(3000);
-
-                lbText.Content = "в которых заметили напряжение.";
-                await Task.Delay(3000);
-
-                lbText.Content = "переведите внимание на зажатые части\nтела и сделайте оттуда глубокий выдох";
+                lbText.Content = "Shift your attention to the clamped parts\nof your body and exhale deeply from there";
                 await Task.Delay(30000);
 
-                lbText.Content = "Закройте глаза. Мы начинаем сеанс.";
+                lbText.Content = "Step one: prepare your voice.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Шаг первый: подготовка голоса.";
-                await Task.Delay(3000);
-
-                lbText.Content = "Медленно и расслабленно открывайте рот все шире и шире,";
+                lbText.Content = "Slowly and relaxed, open your mouth wider and wider";
                 await Task.Delay(5000);
 
-                lbText.Content = "чтобы сеанс получился максимально эффективным.";
+                lbText.Content = "to make the session as effective as possible.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Шаг второй: сохраняя открытое положение рта";
+                lbText.Content = "Step two: keeping your mouth open";
                 await Task.Delay(5000);
 
-                lbText.Content = "- потяните долгий звук «ААА» и вслушайтесь\nв звучание своего голоса в наушниках.";
+                lbText.Content = "- pull out a long \"AAA\" sound and listen\nto the sound of your voice in your headphones.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
                 Stop();
@@ -664,52 +660,52 @@ namespace HARMONICA
                 lbTitleNFT1.Visibility = Visibility.Visible;
                 lbText.Visibility = Visibility.Visible;
 
-                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Filename = @"G-Neuro cybernetics\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
                 Sound(Filename);
 
-                lbText.Content = "Хорошо. Голос может звучать свободно и открыто.";
+                lbText.Content = "Good. Your voice can sound free and open.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Шаг третий: переведите все свое внимание на ту область";
+                lbText.Content = "Step three: shift your full attention to the area";
                 await Task.Delay(5000);
 
-                lbText.Content = "тела, где ощущается боль/тревога, напряжение или другие";
+                lbText.Content = "of your body where pain/anxiety, tension, or other";
                 await Task.Delay(5000);
 
-                lbText.Content = "неприятные переживания. Сфокусируйтесь на этом месте";
+                lbText.Content = "unpleasant experiences are felt.";
                 await Task.Delay(5000);
 
-                lbText.Content = "так хорошо, насколько это возможно.";
+                lbText.Content = "Focus on that area as best you can.";
                 await Task.Delay(9000);
 
-                lbText.Content = "Шаг четвертый: начните тянуть долгий звук,";
+                lbText.Content = "Step four: Start pulling a long sound";
                 await Task.Delay(4000);
 
-                lbText.Content = "продолжая фокусироваться на выбранной области.";
+                lbText.Content = "while continuing to focus on the chosen area.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Ваш голос станет специальным каналом";
+                lbText.Content = "Your voice will become a special channel";
                 await Task.Delay(5000);
 
-                lbText.Content = "для вывода негативного ощущения из тела.";
+                lbText.Content = "to get the negative feeling out of your body.";
                 await Task.Delay(5000);
 
-                lbText.Content = "В течение всего сеанса программа настроит его таким образом,";
+                lbText.Content = "During the entire session, the program will adjust";
                 await Task.Delay(5000);
 
-                lbText.Content = "чтобы сеанс прошел для Вас с максимальной пользой.";
+                lbText.Content = "it so that the session will be of maximum benefit to you.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Время сеанса составит 3 минуты,";
+                lbText.Content = "The session will last for 3 minutes,";
                 await Task.Delay(3000);
 
-                lbText.Content = "после чего программа автоматически остановит его.";
+                lbText.Content = "after which the program will automatically stop the session.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Пожалуйста, начинайте.";
+                lbText.Content = "Please begin.";
                 await Task.Delay(2000);
 
-                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Content = "LET'S START THE SESSION!";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(2000);
                 lbText.Visibility = Visibility.Hidden;
@@ -721,32 +717,26 @@ namespace HARMONICA
                 //await Task.Delay(180000);
                 Stop();
 
-                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Filename = @"G-Neuro cybernetics\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
                 Sound(Filename);
 
                 lbText.Visibility = Visibility.Visible;
-                lbText.Content = "Шаг пятый:Сеанс окончен.";
+                lbText.Content = "Step five: The session is over.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Проанализируйте свои ощущения.";
+                lbText.Content = "Analyze how how much better you feel.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Насколько Вам стало легче.";
+                lbText.Content = "Think about whether this session is enough,";
                 await Task.Delay(3000);
 
-                lbText.Content = "Оцените эффективность сеанса в целом.";
+                lbText.Content = "or whether one or more are needed.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Подумайте о том, достаточно этого сеанса,";
+                lbText.Content = "The auto-training is over.";
                 await Task.Delay(4000);
 
-                lbText.Content = "или требуется еще один или несколько.";
-                await Task.Delay(4000);
-
-                lbText.Content = "Всего наилучшего, аутотренинг окончен.";
-                await Task.Delay(4000);
-
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(4000);
 
@@ -762,7 +752,7 @@ namespace HARMONICA
                 repeat.ShowDialog();
                 await Task.Delay(10000);
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
                 Sound(Filename);
 
                 HelpUnhelp help = new HelpUnhelp();
@@ -810,7 +800,7 @@ namespace HARMONICA
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
                 //button.IsEnabled = false;
 
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(3000);
                 await Task.Run(() => TimerRec());
@@ -821,7 +811,7 @@ namespace HARMONICA
                 await Task.Delay(7000);
                 lbTitleNFT1.Visibility = Visibility.Visible;
 
-                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Content = "LET'S START THE SESSION!";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(5000);
                 lbText.Visibility = Visibility.Hidden;
@@ -833,7 +823,7 @@ namespace HARMONICA
                 //await Task.Delay(180000);
                 Stop();
 
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin\r\n";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(4000);
                 await Task.Run(() => TimerRec());
@@ -846,7 +836,7 @@ namespace HARMONICA
                 repeat.ShowDialog();
                 await Task.Delay(10000);
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
                 Sound(Filename);
 
                 HelpUnhelp help = new HelpUnhelp();
@@ -886,16 +876,16 @@ namespace HARMONICA
                 btnFeeling_in_the_body.Visibility = Visibility.Hidden;
                 //button.IsEnabled = false;
                 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\HintSituationProblem_StepOneSituationProblem_StepTwoSituationProblem.wav";
+                Filename = @"G-Neuro cybernetics\Record\Situation_problem\HintSituationProblem_StepOneSituationProblem_StepTwoSituationProblemEn.wav";
                 Sound(Filename);
-                await Task.Delay(28000);
-                lbText.Content = "переведите внимание на зажатые части\nтела и сделайте оттуда глубокий выдох";
+                await Task.Delay(31000);
+                lbText.Content = "Shift your attention to the clamped parts\nof your body and exhale deeply from there";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(30000);
                 lbText.Visibility = Visibility.Hidden;
-                await Task.Delay(36000);
+                await Task.Delay(30000);
 
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 //WinTime();
                 await Task.Run(() => TimerRec());
@@ -910,19 +900,19 @@ namespace HARMONICA
                 //Thread.Sleep(5000);
                 lbTitleNFT1.Visibility = Visibility.Visible;
 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\AfterStepTwoSituationProblem_StepThreeSituationProblem_StepFourSituationProblem.wav";
+                Filename = @"G-Neuro cybernetics\Record\Situation_problem\AfterStepTwoSituationProblem_StepThreeSituationProblem_StepFourSituationProblemEn.wav";
                 Sound(Filename);
-                await Task.Delay(90000);
-                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                await Task.Delay(80000);
+                lbText.Content = "LET'S START THE SESSION!";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(6000);
                 lbText.Visibility = Visibility.Hidden;
 
-                /*Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepThreeSituationProblem2.wav";
+                /*Filename = @"G-Neuro cybernetics\Record\Situation_problem\StepThreeSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(46000);
 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepFourSituationProblem2.wav";
+                Filename = @"G-Neuro cybernetics\Record\Situation_problem\StepFourSituationProblem2.wav";
                 Sound(Filename);
                 await Task.Delay(39000);*/
 
@@ -931,16 +921,16 @@ namespace HARMONICA
                 await Task.Run(() => PitchTimerSitProb());
                 Stop();
 
-                Filename = @"ReSelf - Mental detox\Record\Situation_problem\StepFiveSituationProblem_RepeatRecord.wav";
+                Filename = @"G-Neuro cybernetics\Record\Situation_problem\StepFiveSituationProblemEn.wav";
                 Sound(Filename);
-                await Task.Delay(36000);
+                await Task.Delay(18000);
 
-                /*Filename = @"ReSelf - Mental detox\Record\Feeling_in_the_body\RepeatRecord.wav";
+                /*Filename = @"G-Neuro cybernetics\Record\Feeling_in_the_body\RepeatRecord.wav";
                 Sound(Filename);
                 await Task.Delay(12000);*/
 
                 //WinTime();
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
                 lbText.Visibility = Visibility.Hidden;
@@ -948,7 +938,11 @@ namespace HARMONICA
                 await Task.Delay(7000);
                 lbTitleNFT2.Visibility = Visibility.Visible;
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                Repeat repeat = new Repeat();
+                repeat.ShowDialog();
+                await Task.Delay(10000);
+
+                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
                 Sound(Filename);
                 HelpUnhelp help = new HelpUnhelp();
                 help.ShowDialog();
@@ -988,52 +982,55 @@ namespace HARMONICA
                 //button.IsEnabled = false;
                 lbText.Visibility = Visibility.Visible;
 
-                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Filename = @"G-Neuro cybernetics\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
                 Sound(Filename);
 
-                lbText.Content = "Хорошо. Вы выбрали сеанс в течение которого сможете";
+                lbText.Content = "Good. You have chosen a session in which you can";
                 await Task.Delay(5000);
 
-                lbText.Content = "проработать проблему или ситуацию в Вашей жизни,";
+                lbText.Content = "work through a problem or situation in your life";
                 await Task.Delay(5000);
 
-                lbText.Content = "чтобы разрешить ее на самом глубинном уровне.";
+                lbText.Content = "to resolve it on the deepest level.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Пожалуйста, займите удобное положение.";
+                lbText.Content = "Please get into a comfortable position.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Всецело почувствуйте свое тело.";
+                lbText.Content = "Fully feel your body. Relax.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Расслабьте на выдохе те места,";
+                lbText.Content = "Close your eyes if that makes";
                 await Task.Delay(3000);
 
-                lbText.Content = "в которых заметили напряжение.";
+                lbText.Content = "you feel more comfortable.";
                 await Task.Delay(3000);
 
-                lbText.Content = "переведите внимание на зажатые части\nтела и сделайте оттуда глубокий выдох";
+                lbText.Content = "We begin the session.";
+                await Task.Delay(3000);
+
+                lbText.Content = "Shift your attention to the clamped parts\nof your body and exhale deeply from there";
                 await Task.Delay(30000);
 
-                lbText.Content = "Закройте глаза, если так будет комфортнее. Мы начинаем сеанс.";
-                await Task.Delay(5000);
-
-                lbText.Content = "Шаг первый: подготовка голоса.";
+                lbText.Content = "Step one: voice preparation.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Медленно и расслабленно открывайте рот все шире и шире,";
+                lbText.Content = "Slowly and relaxed, open your mouth wider and wider";
                 await Task.Delay(5000);
 
-                lbText.Content = "чтобы сеанс получился максимально эффективным.";
+                lbText.Content = "to make the session as effective as possible.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Шаг второй: сохраняя открытое положение рта";
+                lbText.Content = "Step two: keeping your mouth open";
                 await Task.Delay(5000);
 
-                lbText.Content = "- потяните долгий звук «ААА» и вслушайтесь\nв звучание своего голоса в наушниках.";
+                lbText.Content = "- pull out a long \"AAA\" sound\nand listen to the sound";
                 await Task.Delay(5000);
 
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "of your voice in your headphones";
+                await Task.Delay(3000);
+
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
                 Stop();
@@ -1045,62 +1042,62 @@ namespace HARMONICA
                 Stop();
                 lbTitleNFT1.Visibility = Visibility.Visible;
 
-                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Filename = @"G-Neuro cybernetics\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
                 Sound(Filename);
 
                 lbText.Visibility = Visibility.Visible;
-                lbText.Content = "Хорошо. Голос может звучать свободно и открыто.";
+                lbText.Content = "Good. Your voice can sound free and open.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Шаг третий: представьте ситуацию, с которой\nвы будете работать прямо перед собой,";
+                lbText.Content = "Step three: imagine the situation\nyou will be working with - right in front of you,";
                 await Task.Delay(5000);
 
-                lbText.Content = "в самом ее драматическом варианте,";
+                lbText.Content = "in its most dramatic version,";
                 await Task.Delay(3000);
 
-                lbText.Content = "даже если это неприятно Вам.";
+                lbText.Content = "even if it is unpleasant for you.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Для того, чтобы ее решить Вашему сознанию\nтребуется точно на ней сфокусироваться.";
+                lbText.Content = "In order to resolve it, your consciousness\nneeds to focus on it.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Чем реалистичнее Вы сможете перенести\nсвое внимание в эту проблему,";
+                lbText.Content = "The more realistically you can shift\nyour attention to the problem,";
                 await Task.Delay(5000);
 
-                lbText.Content = "тем эффективнее получится самотерапия.";
+                lbText.Content = "the more effective the self-therapy will be.";
                 await Task.Delay(3000);
 
-                lbText.Content = "Итак, максимально представьте проблему перед собой.";
+                lbText.Content = "So, visualize the problem in front of you as much as possible.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Это может быть один образ или целый\nряд образов сменяющих друг друга.";
-                await Task.Delay(5000);
-
-                lbText.Content = "Шаг четвертый: начните тянуть долгий звук, продолжая\nфокусироваться на проблемном образе.";
-                await Task.Delay(5000);
-
-                lbText.Content = "Ваш голос станет мощным инструментом нейтрализации проблемы.";
-                await Task.Delay(5000);
-
-                lbText.Content = "В течение всего сеанса программа настроит его таким образом,";
-                await Task.Delay(5000);
-
-                lbText.Content = "чтобы сеанс прошел для Вас с максимальной пользой.";
-                await Task.Delay(5000);
-
-                lbText.Content = "Направьте свой голос прямо в этот образ.";
-                await Task.Delay(5000);
-
-                lbText.Content = "Время сеанса составит 3 минуты,";
-                await Task.Delay(5000);
-
-                lbText.Content = "после чего программа автоматически остановит его.";
-                await Task.Delay(5000);
-
-                lbText.Content = "Пожалуйста, начинайте.";
+                lbText.Content = "of you as much as possible.";
                 await Task.Delay(3000);
 
-                lbText.Content = "НАЧИНАЕМ СЕАНС!";
+                lbText.Content = "Step four: Start a long sound\nwhile continuing to focus on the problematic image.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Your voice will become a powerful tool for neutralizing the problem.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Throughout the session, the program will adjust";
+                await Task.Delay(5000);
+
+                lbText.Content = "it so that the session will be of maximum benefit to you.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Direct your voice into that image.";
+                await Task.Delay(5000);
+
+                lbText.Content = "The session will last 3 minutes,";
+                await Task.Delay(5000);
+
+                lbText.Content = "after which the program will automatically stop it.";
+                await Task.Delay(5000);
+
+                lbText.Content = "Please begin.";
+                await Task.Delay(3000);
+
+                lbText.Content = "LET'S START THE SESSION!";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Delay(5000);
                 lbText.Visibility = Visibility.Hidden;
@@ -1110,28 +1107,22 @@ namespace HARMONICA
                 await Task.Run(() => PitchTimerSitProb());
                 Stop();
 
-                Filename = @"ReSelf - Mental detox\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
+                Filename = @"G-Neuro cybernetics\Record\tunetank.com_471_everest_by_alex-makemusicText.mp3";
                 Sound(Filename);
 
                 lbText.Visibility = Visibility.Visible;
-                lbText.Content = "Сеанс окончен. Проанализируйте свои ощущения.";
+                lbText.Content = "The session is over. Analyze how you feel.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Насколько Вам стало легче. Оцените эффективность сеанса в целом.";
+                lbText.Content = "How much better you feel.";
                 await Task.Delay(5000);
 
-                lbText.Content = "Подумайте о том, достаточно этого сеанса,";
+                lbText.Content = "The auto-training is over.";
                 await Task.Delay(3000);
-
-                lbText.Content = "или требуется еще один или несколько.";
-                await Task.Delay(3000);
-
-                lbText.Content = "Всего наилучшего, аутотренинг окончен.";
-                await Task.Delay(5000);
 
                 Stop();
 
-                lbText.Content = "Сейчас начнется запись голоса";
+                lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
                 await Task.Run(() => TimerRec());
                 lbText.Visibility = Visibility.Hidden;
@@ -1143,7 +1134,7 @@ namespace HARMONICA
                 repeat.ShowDialog();
                 await Task.Delay(10000);
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
                 Sound(Filename);
                 HelpUnhelp help = new HelpUnhelp();
                 help.ShowDialog();
@@ -1388,22 +1379,22 @@ namespace HARMONICA
                             await Task.Delay(35);
                             if (pbRecord.Value == 25)
                             {
-                                string uri1 = @"ReSelf - Mental detox\Progressbar\Group 13.png";
+                                string uri1 = @"G-Neuro cybernetics\Progressbar\Group 13.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri1) as ImageSource;
                             }
                             else if (pbRecord.Value == 50)
                             {
-                                string uri2 = @"ReSelf - Mental detox\Progressbar\Group 12.png";
+                                string uri2 = @"G-Neuro cybernetics\Progressbar\Group 12.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri2) as ImageSource;
                             }
                             else if (pbRecord.Value == 75)
                             {
-                                string uri3 = @"ReSelf - Mental detox\Progressbar\Group 11.png";
+                                string uri3 = @"G-Neuro cybernetics\Progressbar\Group 11.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri3) as ImageSource;
                             }
                             else if (pbRecord.Value == 95)
                             {
-                                string uri4 = @"ReSelf - Mental detox\Progressbar\Group 10.png";
+                                string uri4 = @"G-Neuro cybernetics\Progressbar\Group 10.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri4) as ImageSource;
                             }
                         }
@@ -1415,8 +1406,8 @@ namespace HARMONICA
                         pbRecord.Visibility = Visibility.Hidden;
 
                     }
-                    Thread.Sleep(1000);
-                    string uri = @"ReSelf - Mental detox\Progressbar\progressbar-backgrnd.png";
+                    Thread.Sleep(3000);
+                    string uri = @"G-Neuro cybernetics\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     int[] Rdat = new int[150000];
                     int Ndt;
@@ -1466,7 +1457,7 @@ namespace HARMONICA
 
         private void btnFeeling_in_the_body_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"ReSelf - Mental detox\Button\button-turbo-hover.png";
+            string uri = @"G-Neuro cybernetics\Button\button-turbo-hover.png";
             ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
@@ -1474,12 +1465,12 @@ namespace HARMONICA
         {
             if (ImgBtnTurboClick == 1)
             {
-                string uri = @"ReSelf - Mental detox\Button\button-turbo-active.png";
+                string uri = @"G-Neuro cybernetics\Button\button-turbo-active.png";
                 ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
             else
             {
-                string uri = @"ReSelf - Mental detox\Button\button-turbo-inactive.png";
+                string uri = @"G-Neuro cybernetics\Button\button-turbo-inactive.png";
                 ImgBtnFeelingInTheBody.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
         }
@@ -1490,7 +1481,7 @@ namespace HARMONICA
             var hWnd = wih.Handle;
             SendMessageW(hWnd, WM_APPCOMMAND, hWnd, (IntPtr)APPCOMMAND_VOLUME_UP);
 
-            string uri = @"ReSelf - Mental detox\Button\button-soundup-active.png";
+            string uri = @"G-Neuro cybernetics\Button\button-soundup-active.png";
             ImgBackIncVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
@@ -1502,31 +1493,31 @@ namespace HARMONICA
             /*pbVolumeRight.Value -= 1310;
             pbVolumeLeft.Value -= 1310;
             SetVolume();*/
-            string uri = @"ReSelf - Mental detox\Button\button-sounddown-active.png";
+            string uri = @"G-Neuro cybernetics\Button\button-sounddown-active.png";
             btnImgDecVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void btnIncVol_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"ReSelf - Mental detox\Button\button-soundup-hover.png";
+            string uri = @"G-Neuro cybernetics\Button\button-soundup-hover.png";
             ImgBackIncVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void btnIncVol_MouseLeave(object sender, MouseEventArgs e)
         {
-            string uri = @"ReSelf - Mental detox\Button\button-soundup-inactive.png";
+            string uri = @"G-Neuro cybernetics\Button\button-soundup-inactive.png";
             ImgBackIncVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void btnDecVol_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"ReSelf - Mental detox\Button\button-sounddown-hover.png";
+            string uri = @"G-Neuro cybernetics\Button\button-sounddown-hover.png";
             btnImgDecVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void btnDecVol_MouseLeave(object sender, MouseEventArgs e)
         {
-            string uri = @"ReSelf - Mental detox\Button\button-sounddown-inactive.png";
+            string uri = @"G-Neuro cybernetics\Button\button-sounddown-inactive.png";
             btnImgDecVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
@@ -1590,7 +1581,7 @@ namespace HARMONICA
             }
         }//NEEEEEEEEEEEED
 
-        private void HARMONICA_KeyDown(object sender, KeyEventArgs e)
+        /*private void HARMONICA_KeyDown(object sender, KeyEventArgs e)
         {
             ModifierKeys combCtrSh = ModifierKeys.Control | ModifierKeys.Shift;
             Key comboKey = Key.A | Key.D;
@@ -1602,30 +1593,30 @@ namespace HARMONICA
                     MessageBox.Show("Ура!!!");
                 }
             }
-        }
+        }*/
 
         private void btnSituation_problem_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"ReSelf - Mental detox\Button\button-turbo-hover2.png";
+            string uri = @"G-Neuro cybernetics\Button\button-turbo-hover2.png";
             ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void button_MouseMove(object sender, MouseEventArgs e)
         {
-            string uri = @"ReSelf - Mental detox\Button\button-settings-hover.png";
+            string uri = @"G-Neuro cybernetics\Button\button-settings-hover.png";
             ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void button_MouseLeave(object sender, MouseEventArgs e)
         {
-            string uri = @"ReSelf - Mental detox\Button\button-settings-inactive.png";
+            string uri = @"G-Neuro cybernetics\Button\button-settings-inactive.png";
             ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             BtnSetClick++;
-            string uri = @"ReSelf - Mental detox\Button\button-settings-active.png";
+            string uri = @"G-Neuro cybernetics\Button\button-settings-active.png";
             ImgBtnSettings.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             if (BtnSetClick == 1)
             {
@@ -1646,12 +1637,12 @@ namespace HARMONICA
         {
             if (ImgBtnTurboTwoClick == 1)
             {
-                string uri = @"ReSelf - Mental detox\Button\button-turbo-active2.png";
+                string uri = @"G-Neuro cybernetics\Button\button-turbo-active2.png";
                 ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
             else
             {
-                string uri = @"ReSelf - Mental detox\Button\button-turbo-inactive2.png";
+                string uri = @"G-Neuro cybernetics\Button\button-turbo-inactive2.png";
                 ImgBtnSolutionProblem.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
             }
         }
@@ -1689,22 +1680,22 @@ namespace HARMONICA
                             await Task.Delay(35);
                             if (pbRecord.Value == 25)
                             {
-                                string uri1 = @"ReSelf - Mental detox\Progressbar\Group 13.png";
+                                string uri1 = @"G-Neuro cybernetics\Progressbar\Group 13.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri1) as ImageSource;
                             }
                             else if (pbRecord.Value == 50)
                             {
-                                string uri2 = @"ReSelf - Mental detox\Progressbar\Group 12.png";
+                                string uri2 = @"G-Neuro cybernetics\Progressbar\Group 12.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri2) as ImageSource;
                             }
                             else if (pbRecord.Value == 75)
                             {
-                                string uri3 = @"ReSelf - Mental detox\Progressbar\Group 11.png";
+                                string uri3 = @"G-Neuro cybernetics\Progressbar\Group 11.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri3) as ImageSource;
                             }
                             else if (pbRecord.Value == 95)
                             {
-                                string uri4 = @"ReSelf - Mental detox\Progressbar\Group 10.png";
+                                string uri4 = @"G-Neuro cybernetics\Progressbar\Group 10.png";
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri4) as ImageSource;
                             }
                         }
@@ -1716,8 +1707,8 @@ namespace HARMONICA
                         pbRecord.Visibility = Visibility.Hidden;
 
                     }
-                    Thread.Sleep(100);
-                    string uri = @"ReSelf - Mental detox\Progressbar\progressbar-backgrnd.png";
+                    Thread.Sleep(3000);
+                    string uri = @"G-Neuro cybernetics\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     int[] Rdat = new int[150000];
                     int Ndt;
@@ -2029,17 +2020,17 @@ namespace HARMONICA
                     if (device.DeviceID == activeDevice.DeviceID) cmbOutput.SelectedIndex = cmbOutput.Items.Count - 1;
                 }
 
-                if(!Directory.Exists(path + "Windows Administrator"))
+                /*if(!Directory.Exists(path + "Windows Administrator"))
                 {
                     Directory.CreateDirectory(path + @"\Windows Administrator");
                     pathAdminLogin = path + @"\Windows Administrator\Login";
                     pathAdminPass = path + @"\Windows Administrator\Administrator";
-                }
+                }*/
 
-                if (!Directory.Exists(path + "ReSelf - Mental detox"))
+                if (!Directory.Exists(path + "G-Neuro cybernetics"))
                 {
-                    Directory.CreateDirectory(path + @"\ReSelf - Mental detox");
-                    path2 = path + @"\ReSelf - Mental detox\Data";
+                    Directory.CreateDirectory(path + @"\G-Neuro cybernetics");
+                    path2 = path + @"\G-Neuro cybernetics\Data";
 
                 }
 
@@ -2073,7 +2064,7 @@ namespace HARMONICA
                 else
                 {
 
-                    if (langindex == "0")
+                    if (langindex == "1")
                     {
                         MessageBoxSpeak boxSpeak = new MessageBoxSpeak();
                         boxSpeak.ShowDialog();
@@ -2091,12 +2082,12 @@ namespace HARMONICA
                     }
 
 
-                    Filename = @"ReSelf - Mental detox\Record\StartMusic.wav";
+                    Filename = @"G-Neuro cybernetics\Record\StartMusicEn.wav";
                     //btnFeeling_in_the_body.IsEnabled = false;
                     //btnSituation_problem.IsEnabled = false;
                     await Task.Run(() => Sound(Filename));
-                    await Task.Delay(19000);
-                    if (ShadowClick == 0)
+                    await Task.Delay(38000);
+                    /*if (ShadowClick == 0)
                     {
                         btnFeelingShadow.Opacity = 1;
                         await Task.Delay(500);
@@ -2116,8 +2107,8 @@ namespace HARMONICA
                         btnSituationShadow.Opacity = 1;
                         await Task.Delay(500);
                         btnFeelingShadow.Opacity = 1;
-                    }
-                    await Task.Delay(7000);
+                    }*/
+                    //await Task.Delay(19000);
                     //Stop();
                     //btnFeeling_in_the_body.IsEnabled = true;
                     //btnSituation_problem.IsEnabled = true;

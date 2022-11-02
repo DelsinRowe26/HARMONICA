@@ -17,6 +17,10 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Update ReSelf - Mental deto
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Update ReSelf - Mental detox v.1.0.0.4 Setup", "Update ReSelf - Mental detox v.1.0.0.4 Setup\Update ReSelf - Mental detox v.1.0.0.4 Setup.vdproj", "{53C7B027-FB24-4001-92D2-2FB1B203FFAA}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "G-Neuro cybernetics v.1.0.0.0 Setup", "G-Neuro cybernetics v.1.0.0.0 Setup\G-Neuro cybernetics v.1.0.0.0 Setup.vdproj", "{AEA39899-DE69-4FB3-90B0-15F2285EA1C6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "G - Neuro cybernetics v1.0.0.1 Setup", "G - Neuro cybernetics v1.0.0.1 Setup\G - Neuro cybernetics v1.0.0.1 Setup.vdproj", "{A12094A9-719C-424D-B4C5-B68E1C196ECE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{89433B7B-8278-4C8A-8D9E-156FC5BBE127}.Release|Any CPU.ActiveCfg = Release
 		{53C7B027-FB24-4001-92D2-2FB1B203FFAA}.Debug|Any CPU.ActiveCfg = Debug
 		{53C7B027-FB24-4001-92D2-2FB1B203FFAA}.Release|Any CPU.ActiveCfg = Release
+		{AEA39899-DE69-4FB3-90B0-15F2285EA1C6}.Debug|Any CPU.ActiveCfg = Debug
+		{AEA39899-DE69-4FB3-90B0-15F2285EA1C6}.Release|Any CPU.ActiveCfg = Release
+		{A12094A9-719C-424D-B4C5-B68E1C196ECE}.Debug|Any CPU.ActiveCfg = Debug
+		{A12094A9-719C-424D-B4C5-B68E1C196ECE}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

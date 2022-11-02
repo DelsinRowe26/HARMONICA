@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HARMONICA"
-        mc:Ignorable="d" Height="170" Width="313" ResizeMode="NoResize" Topmost="True">
+        mc:Ignorable="d" Height="170" Width="313" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock x:Name="tbText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Помогла ли вам программа?" VerticalAlignment="Top" Height="72" Width="287" FontWeight="Bold" FontSize="16">
+        <TextBlock x:Name="tbText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Did the program help you?" VerticalAlignment="Top" Height="72" Width="287" FontWeight="Bold" FontSize="16">
             <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF100B7"/>
@@ -14,7 +14,7 @@
                 </LinearGradientBrush>
             </TextBlock.Foreground>
         </TextBlock>
-        <Button x:Name="btnHelp" Content="Помогло" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" Height="33" Width="75" FontWeight="Bold" Click="btnHelp_Click">
+        <Button x:Name="btnHelp" Content="Yes" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" Height="33" Width="75" FontWeight="Bold" Click="btnHelp_Click">
             <Button.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF100B7"/>
@@ -22,7 +22,7 @@
                 </LinearGradientBrush>
             </Button.Foreground>
         </Button>
-        <Button x:Name="btnUnhelp" Content="Не помогло" HorizontalAlignment="Left" Margin="198,87,0,0" VerticalAlignment="Top" Width="75" Height="33" FontWeight="Bold" Click="btnUnhelp_Click">
+        <Button x:Name="btnUnhelp" Content="No" HorizontalAlignment="Left" Margin="198,87,0,0" VerticalAlignment="Top" Width="75" Height="33" FontWeight="Bold" Click="btnUnhelp_Click">
             <Button.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF100B7"/>
