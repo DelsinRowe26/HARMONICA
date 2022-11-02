@@ -63,6 +63,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActivationForm.xaml.cs" />
+    <Compile Include="AdministratorWin.xaml.cs">
+      <DependentUpon>AdministratorWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="check.cs" />
     <Compile Include="ChoiceView.xaml.cs">
       <DependentUpon>ChoiceView.xaml</DependentUpon>
@@ -93,6 +96,10 @@
     <Page Include="ActivationForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdministratorWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChoiceView.xaml">
       <SubType>Designer</SubType>

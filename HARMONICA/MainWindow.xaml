@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HARMONICA"
         mc:Ignorable="d"
-        Title="ReSelf - Mental detox" Height="602" Width="910" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing" Icon="/reselg-logo.ico" Activated="HARMONICA_Activated">
+        Title="ReSelf - Mental detox" Height="602" Width="910" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing" Icon="/reselg-logo.ico" Activated="HARMONICA_Activated" KeyDown="HARMONICA_KeyDown">
     <Window.Background>
         <ImageBrush ImageSource="/32547346-f758-4436-9811-3a4aca09ae1d.png"/>
     </Window.Background>

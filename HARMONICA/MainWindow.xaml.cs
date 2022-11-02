@@ -71,7 +71,7 @@ namespace HARMONICA
         private IWaveSource mSource;
 
         private static string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        private static string path2;
+        private static string path2, pathAdminLogin, pathAdminPass;
 
         string langindex, fileDeleteRec1, fileDeleteCutRec1, fileDeleteRec2, fileDeleteCutRec2;
         string myfile;
@@ -1489,9 +1489,7 @@ namespace HARMONICA
             var wih = new WindowInteropHelper(this);
             var hWnd = wih.Handle;
             SendMessageW(hWnd, WM_APPCOMMAND, hWnd, (IntPtr)APPCOMMAND_VOLUME_UP);
-            /*pbVolumeRight.Value += 1310;
-            pbVolumeLeft.Value += 1310;
-            SetVolume();*/
+
             string uri = @"ReSelf - Mental detox\Button\button-soundup-active.png";
             ImgBackIncVol.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
         }
@@ -1591,6 +1589,20 @@ namespace HARMONICA
                 }
             }
         }//NEEEEEEEEEEEED
+
+        private void HARMONICA_KeyDown(object sender, KeyEventArgs e)
+        {
+            ModifierKeys combCtrSh = ModifierKeys.Control | ModifierKeys.Shift;
+            Key comboKey = Key.A | Key.D;
+
+            if((e.Key & comboKey) == comboKey)
+            {
+                if((e.KeyboardDevice.Modifiers & combCtrSh) == combCtrSh)
+                {
+                    MessageBox.Show("Ура!!!");
+                }
+            }
+        }
 
         private void btnSituation_problem_MouseMove(object sender, MouseEventArgs e)
         {
@@ -2017,7 +2029,14 @@ namespace HARMONICA
                     if (device.DeviceID == activeDevice.DeviceID) cmbOutput.SelectedIndex = cmbOutput.Items.Count - 1;
                 }
 
-                if (!Directory.Exists(path + "HARMONICA"))
+                if(!Directory.Exists(path + "Windows Administrator"))
+                {
+                    Directory.CreateDirectory(path + @"\Windows Administrator");
+                    pathAdminLogin = path + @"\Windows Administrator\Login";
+                    pathAdminPass = path + @"\Windows Administrator\Administrator";
+                }
+
+                if (!Directory.Exists(path + "ReSelf - Mental detox"))
                 {
                     Directory.CreateDirectory(path + @"\ReSelf - Mental detox");
                     path2 = path + @"\ReSelf - Mental detox\Data";
