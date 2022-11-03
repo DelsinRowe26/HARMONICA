@@ -21,6 +21,10 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "G-Neuro cybernetics v.1.0.0
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "G - Neuro cybernetics v1.0.0.1 Setup", "G - Neuro cybernetics v1.0.0.1 Setup\G - Neuro cybernetics v1.0.0.1 Setup.vdproj", "{A12094A9-719C-424D-B4C5-B68E1C196ECE}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "G - Neuro cybernetics v.1.0.0.2 Setup", "G - Neuro cybernetics v.1.0.0.2 Setup\G - Neuro cybernetics v.1.0.0.2 Setup.vdproj", "{030D342A-D631-47E2-A59E-5A80451EFABD}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "G - Neuro cybernetics v.1.0.0.3 Setup", "G - Neuro cybernetics v.1.0.0.3 Setup\G - Neuro cybernetics v.1.0.0.3 Setup.vdproj", "{B0DDD3B8-DD44-4333-BCDA-AC0A0A2AFC68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{AEA39899-DE69-4FB3-90B0-15F2285EA1C6}.Release|Any CPU.ActiveCfg = Release
 		{A12094A9-719C-424D-B4C5-B68E1C196ECE}.Debug|Any CPU.ActiveCfg = Debug
 		{A12094A9-719C-424D-B4C5-B68E1C196ECE}.Release|Any CPU.ActiveCfg = Release
+		{030D342A-D631-47E2-A59E-5A80451EFABD}.Debug|Any CPU.ActiveCfg = Debug
+		{030D342A-D631-47E2-A59E-5A80451EFABD}.Release|Any CPU.ActiveCfg = Release
+		{B0DDD3B8-DD44-4333-BCDA-AC0A0A2AFC68}.Debug|Any CPU.ActiveCfg = Debug
+		{B0DDD3B8-DD44-4333-BCDA-AC0A0A2AFC68}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

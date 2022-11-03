@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>reselg-logo.ico</ApplicationIcon>
+    <ApplicationIcon>G-Neuro-logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSCore">
@@ -198,6 +198,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Панель_нейротюнер_для_колцентров %281%29.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="G-Neuro-logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

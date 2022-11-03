@@ -647,12 +647,13 @@ namespace HARMONICA
 
                 lbText.Content = "Get ready, voice recording is about to begin";
                 lbText.Visibility = Visibility.Visible;
-                await Task.Run(() => TimerRec());
                 Stop();
+                await Task.Run(() => TimerRec());
+                
                 lbText.Visibility = Visibility.Hidden;
                 await Task.Run(() => StartFullDuplex1());
                 Recording1();
-                await Task.Delay(5000);
+                await Task.Delay(7000);
 
                 Stop();
                 await Task.Delay(2000);
@@ -1037,7 +1038,7 @@ namespace HARMONICA
                 lbText.Visibility = Visibility.Hidden;
                 await Task.Run(() => StartFullDuplex1());
                 Recording1();
-                await Task.Delay(5000);
+                await Task.Delay(7000);
 
                 Stop();
                 lbTitleNFT1.Visibility = Visibility.Visible;
@@ -1375,7 +1376,7 @@ namespace HARMONICA
                         mSoundIn.DataAvailable += (s, data) => record.Write(data.Data, data.Offset, data.ByteCount);
                         for (int i = 0; i < 100; i++)
                         {
-                            pbRecord.Value++;
+                            Dispatcher.Invoke(() => pbRecord.Value++);
                             await Task.Delay(35);
                             if (pbRecord.Value == 25)
                             {
@@ -1398,17 +1399,19 @@ namespace HARMONICA
                                 ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri4) as ImageSource;
                             }
                         }
-                        //Thread.Sleep(5000);
+                        
 
                         mSoundIn.Stop();
-                        lbRecordPB.Visibility = Visibility.Hidden;
-                        pbRecord.Value = 0;
-                        pbRecord.Visibility = Visibility.Hidden;
+                        //Thread.Sleep(5000);
+                        Dispatcher.Invoke(() => lbRecordPB.Visibility = Visibility.Hidden);
+                        Dispatcher.Invoke(() => pbRecord.Value = 0);
+                        Dispatcher.Invoke(() => pbRecord.Visibility = Visibility.Hidden);
 
                     }
-                    Thread.Sleep(3000);
+                    
                     string uri = @"G-Neuro cybernetics\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
+                    //Thread.Sleep(5000);
                     int[] Rdat = new int[150000];
                     int Ndt;
                     Ndt = vizualzvuk(cutmyfile, myfile, Rdat, 1);
