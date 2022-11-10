@@ -487,6 +487,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 Feeling_in_the_body_pattern();
                 Stop();
@@ -569,14 +570,17 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
 
-                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
-                Sound(Filename);
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
+                if (Repeat.click == 1)
+                {
+                    Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -601,6 +605,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 Feeling_in_the_body_pattern();
                 Stop();
@@ -751,16 +756,18 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
 
-                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
-                Sound(Filename);
+                if (Repeat.click == 1)
+                {
+                    Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
 
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
-
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -785,6 +792,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 if (Session == "Feel")
                 {
@@ -835,15 +843,17 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
+                if(Repeat.click == 1)
+                {
+                    Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
 
-                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
-                Sound(Filename);
-
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -868,6 +878,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 Situation_Problem_pattern();
                 Stop();
@@ -941,14 +952,17 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
 
-                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
-                Sound(Filename);
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
+                if (Repeat.click == 1)
+                {
+                    Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -1133,14 +1147,17 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
 
-                Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
-                Sound(Filename);
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
+                if (Repeat.click == 1)
+                {
+                    Filename = @"G-Neuro cybernetics\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
 
             }
             catch (Exception ex)
