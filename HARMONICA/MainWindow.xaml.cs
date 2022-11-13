@@ -83,7 +83,7 @@ namespace HARMONICA
         private int SampleRate;
         private float pitchVal;
         private float reverbVal;
-        private static int limit = 20;
+        private static int limit = 15, countLimit = 15;
 
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
@@ -311,7 +311,7 @@ namespace HARMONICA
 
                 if (langindex == "0")
                 {
-                    Title = "ReSelf - Ментальный детокс";
+                    Title = "ReSelf - Ментальный детокс Катарсис";
                     lbMicrophone.Content = "Выбор микрофона";
                     lbSpeaker.Content = "Выбор динамиков";
                     lbRecordPB.Content = "Идёт запись...";
@@ -320,7 +320,7 @@ namespace HARMONICA
                 }
                 else
                 {
-                    Title = "ReSelf - Mental detox";
+                    Title = "ReSelf - Mental detox Katarsis";
                     lbMicrophone.Content = "Microphone selection";
                     lbSpeaker.Content = "Speaker selection";
                     lbRecordPB.Content = "Recording in progress...";
@@ -485,6 +485,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 Feeling_in_the_body_pattern();
                 Stop();
@@ -564,14 +565,17 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
-                Sound(Filename);
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
+                if (Repeat.click == 1)
+                {
+                    Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -596,6 +600,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 Feeling_in_the_body_pattern();
                 Stop();
@@ -760,15 +765,18 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
-                Sound(Filename);
+                if (Repeat.click == 1)
+                {
+                    Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
 
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
 
             }
             catch (Exception ex)
@@ -794,6 +802,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 if (Session == "Feel")
                 {
@@ -844,15 +853,18 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
-                Sound(Filename);
+                if (Repeat.click == 1)
+                {
+                    Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
 
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -877,6 +889,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 Situation_Problem_pattern();
                 Stop();
@@ -948,12 +961,18 @@ namespace HARMONICA
                 await Task.Delay(7000);
                 lbTitleNFT2.Visibility = Visibility.Visible;
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
-                Sound(Filename);
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
+				Repeat repeat = new Repeat();
+				repeat.ShowDialog();
+
+                if (Repeat.click == 1)
+                {
+                    Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -978,6 +997,7 @@ namespace HARMONICA
         {
             try
             {
+                Repeat.click = 0;
                 ShadowClick = 1;
                 Situation_Problem_pattern();
                 Stop();
@@ -1141,15 +1161,17 @@ namespace HARMONICA
 
                 Repeat repeat = new Repeat();
                 repeat.ShowDialog();
-                await Task.Delay(10000);
+                //await Task.Delay(10000);
 
-                Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
-                Sound(Filename);
-                HelpUnhelp help = new HelpUnhelp();
-                help.ShowDialog();
-                await Task.Delay(140000);
-                Close();
-
+                if (Repeat.click == 1)
+                {
+                    Filename = @"ReSelf - Mental detox\Record\TheSoundEnd.mp3";
+                    Sound(Filename);
+                    HelpUnhelp help = new HelpUnhelp();
+                    help.ShowDialog();
+                    await Task.Delay(140000);
+                    Close();
+                }
             }
             catch (Exception ex)
             {
@@ -1415,7 +1437,7 @@ namespace HARMONICA
                         pbRecord.Visibility = Visibility.Hidden;
 
                     }
-                    Thread.Sleep(1000);
+                    //Thread.Sleep(1000);
                     string uri = @"ReSelf - Mental detox\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     int[] Rdat = new int[150000];
@@ -1590,7 +1612,7 @@ namespace HARMONICA
             }
         }//NEEEEEEEEEEEED
 
-        private void HARMONICA_KeyDown(object sender, KeyEventArgs e)
+        /*private void HARMONICA_KeyDown(object sender, KeyEventArgs e)
         {
             ModifierKeys combCtrSh = ModifierKeys.Control | ModifierKeys.Shift;
             Key comboKey = Key.A | Key.D;
@@ -1602,7 +1624,7 @@ namespace HARMONICA
                     MessageBox.Show("Ура!!!");
                 }
             }
-        }
+        }*/
 
         private void btnSituation_problem_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1716,7 +1738,7 @@ namespace HARMONICA
                         pbRecord.Visibility = Visibility.Hidden;
 
                     }
-                    Thread.Sleep(100);
+                    //Thread.Sleep(100);
                     string uri = @"ReSelf - Mental detox\Progressbar\progressbar-backgrnd.png";
                     ImgPBRecordBack.ImageSource = new ImageSourceConverter().ConvertFromString(uri) as ImageSource;
                     int[] Rdat = new int[150000];
@@ -2029,17 +2051,17 @@ namespace HARMONICA
                     if (device.DeviceID == activeDevice.DeviceID) cmbOutput.SelectedIndex = cmbOutput.Items.Count - 1;
                 }
 
-                if(!Directory.Exists(path + "Windows Administrator"))
+                /*if(!Directory.Exists(path + "Windows Administrator"))
                 {
                     Directory.CreateDirectory(path + @"\Windows Administrator");
                     pathAdminLogin = path + @"\Windows Administrator\Login";
                     pathAdminPass = path + @"\Windows Administrator\Administrator";
-                }
+                }*/
 
-                if (!Directory.Exists(path + "ReSelf - Mental detox"))
+                if (!Directory.Exists(path + "ReSelf - Mental detox Katarsis"))
                 {
-                    Directory.CreateDirectory(path + @"\ReSelf - Mental detox");
-                    path2 = path + @"\ReSelf - Mental detox\Data";
+                    Directory.CreateDirectory(path + @"\ReSelf - Mental detox Katarsis");
+                    path2 = path + @"\ReSelf - Mental detox Katarsis\Data";
 
                 }
 
@@ -2060,7 +2082,9 @@ namespace HARMONICA
                     }
                 }
 
-                if (check.strt(path2) > limit)
+                countLimit = check.strt(path2);
+
+				if (countLimit > limit)
                 {
                     this.IsEnabled = false;
 
@@ -2072,7 +2096,8 @@ namespace HARMONICA
                 }
                 else
                 {
-
+                    //countLimit--;
+                    lbCountLimit.Content = countLimit.ToString() + "/15";
                     if (langindex == "0")
                     {
                         MessageBoxSpeak boxSpeak = new MessageBoxSpeak();

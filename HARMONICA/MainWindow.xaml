@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HARMONICA"
         mc:Ignorable="d"
-        Title="ReSelf - Mental detox" Height="602" Width="910" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing" Icon="/reselg-logo.ico" Activated="HARMONICA_Activated" KeyDown="HARMONICA_KeyDown">
+        Title="ReSelf - Mental detox Katarsis" Height="602" Width="910" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="HARMONICA_Closing" Icon="/reselg-logo.ico" Activated="HARMONICA_Activated">
     <Window.Background>
         <ImageBrush ImageSource="/32547346-f758-4436-9811-3a4aca09ae1d.png"/>
     </Window.Background>
@@ -132,7 +132,7 @@
         </Button>
         <Label x:Name="lbMicrophone" Content="Microphone selection" HorizontalAlignment="Left" Margin="151,162,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Hidden"/>
         <Label x:Name="lbSpeaker" Content="Speaker selection" HorizontalAlignment="Left" Margin="153,231,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Hidden"/>
-        <Label x:Name="lbTitle" Content="ReSelf - Mental detox" HorizontalAlignment="Center" Margin="0,476,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24">
+        <Label x:Name="lbTitle" Content="ReSelf - Mental detox Katarsis" HorizontalAlignment="Center" Margin="0,476,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF100B7"/>
@@ -182,6 +182,14 @@
             </Label.Foreground>
         </Label>
         <Label x:Name="lbTitleNFT2" Content="Второе визуальное&#xA;изображение голоса" HorizontalAlignment="Left" Margin="539,100,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14" Visibility="Hidden">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF100B7"/>
+                    <GradientStop Color="#FF8D00FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Label x:Name="lbCountLimit" Content="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="774,469,0,0" VerticalAlignment="Top" Height="57" Width="84" FontWeight="Bold" FontSize="22">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF100B7"/>

@@ -21,7 +21,7 @@ namespace HARMONICA
     {
 
         public static string repeat = "Yes";
-        private int click = 0;
+        public static int click = 0;
 
         public Repeat()
         {
