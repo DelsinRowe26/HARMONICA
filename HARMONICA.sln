@@ -19,6 +19,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Update ReSelf - Mental deto
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ReSelf - Mental detox Katarsis v.1.0.0.2 Setup", "ReSelf - Mental detox Katarsis v.1.0.0.2 Setup\ReSelf - Mental detox Katarsis v.1.0.0.2 Setup.vdproj", "{64BD43F2-039A-42EE-8A6D-A6D06D97B018}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ReSelf - Mental detox Katarsis v.1.0.0.3 Setup", "ReSelf - Mental detox Katarsis v.1.0.0.3 Setup\ReSelf - Mental detox Katarsis v.1.0.0.3 Setup.vdproj", "{E3EE316C-3260-4B92-B2FD-32EAAF1E3EF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,8 @@ Global
 		{53C7B027-FB24-4001-92D2-2FB1B203FFAA}.Release|Any CPU.ActiveCfg = Release
 		{64BD43F2-039A-42EE-8A6D-A6D06D97B018}.Debug|Any CPU.ActiveCfg = Debug
 		{64BD43F2-039A-42EE-8A6D-A6D06D97B018}.Release|Any CPU.ActiveCfg = Release
+		{E3EE316C-3260-4B92-B2FD-32EAAF1E3EF5}.Debug|Any CPU.ActiveCfg = Debug
+		{E3EE316C-3260-4B92-B2FD-32EAAF1E3EF5}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

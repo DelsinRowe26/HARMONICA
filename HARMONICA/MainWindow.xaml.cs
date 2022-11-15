@@ -78,12 +78,13 @@ namespace HARMONICA
         string cutmyfile;
         private string Filename;
         private string Session;
+        private string KeyPass;
 
         private int ImgBtnTurboClick = 0, ImgBtnTurboTwoClick = 0, BtnSetClick = 0, ShadowClick = 0, SoundClick = 0;
         private int SampleRate;
         private float pitchVal;
         private float reverbVal;
-        private static int limit = 15, countLimit = 15;
+        private static int limit = 22, countLimit = 15;
 
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
@@ -2023,6 +2024,7 @@ namespace HARMONICA
         {
             try
             {
+                limit = 22;
                 if (SoftCl.IsSoftwareInstalled("Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.32.31332") == false)
                 {
                     Process.Start("VC_redist.x86.exe");
@@ -2065,6 +2067,18 @@ namespace HARMONICA
 
                 }
 
+                Stream MyStream;
+
+                if(!File.Exists(path + @"\ReSelf - Mental detox Katarsis\Key.tmp"))
+                {
+                    using (MyStream = File.Open(path + @"\ReSelf - Mental detox Katarsis\Key.tmp", FileMode.OpenOrCreate, FileAccess.Write))
+                    {
+                        StreamWriter myWrite = new StreamWriter(MyStream);
+                        myWrite.WriteLine("");
+                    }
+                    //File.Create(path + @"\ReSelf - Mental detox Katarsis\Key.tmp");
+                }
+
                 string[] filename = File.ReadAllLines(fileInfo1.FullName);
                 if (filename.Length == 1)
                 {
@@ -2082,14 +2096,61 @@ namespace HARMONICA
                     }
                 }
 
-                countLimit = check.strt(path2);
+                /*StreamReader reader = new StreamReader(path + @"\ReSelf - Mental detox Katarsis\Key.tmp");
+                string Key = reader.ReadToEnd();*/
+                using (MyStream = File.Open(path + @"\ReSelf - Mental detox Katarsis\Key.tmp", FileMode.OpenOrCreate, FileAccess.Read))
+                {
+                    StreamReader MyReader = new StreamReader(MyStream);
+                    string Key = MyReader.ReadToEnd();
+                    KeyPass = Key;
+                    
+                }
+                //string hr = "nBs1pVRH\r\n";
+				/*if (KeyPass != hr || KeyPass != "q7|cM**D\r\n" || KeyPass != "$99aJKQI\r\n" || KeyPass != "SYf6f3NJ\r\n" || KeyPass != "|*~0TILx\r\n" || KeyPass != "{1fpjgIa\r\n" || KeyPass != "s4DwaSG6\r\n" || KeyPass != "yCRYymE9\r\n" || KeyPass != "h?d3?NR2\r\n" || KeyPass != "eFcu8H1r\r\n")
+				{
+					limit -= 7;
+				}*/
+                switch (KeyPass)
+                {
+                    case "nBs1pVRH\r\n":
+                        break;
+                    case "q7|cM**D\r\n":
+                        break;
+                    case "$99aJKQI\r\n":
+                        break;
+                    case "SYf6f3NJ\r\n":
+                        break;
+                    case "|*~0TILx\r\n":
+                        break;
+                    case "{1fpjgIa\r\n":
+                        break;
+                    case "s4DwaSG6\r\n":
+                        break;
+                    case "yCRYymE9\r\n":
+                        break;
+                    case "h?d3?NR2\r\n":
+                        break;
+                    case "eFcu8H1r\r\n":
+                        break;
+                    default:
+                        {
+							limit -= 7;
+                            break;
+						}
+				}
+
+                if (IsEnabled == true)
+                {
+                    countLimit = check.strt(path2);
+                }
 
 				if (countLimit > limit)
                 {
                     this.IsEnabled = false;
-
-                    ActivationForm activation = new ActivationForm();
-                    activation.Show();
+                    /*ActivationForm activation = new ActivationForm();
+                    activation.Show();*/
+                    WinKey win = new WinKey();
+                    win.Show();
                     MessageBoxAct boxAct = new MessageBoxAct();
                     boxAct.ShowDialog();
 

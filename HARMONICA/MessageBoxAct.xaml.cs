@@ -27,7 +27,7 @@ namespace HARMONICA
 
         private void btnSite_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://www.neurotuners.ru/");
+            Process.Start("https://g-neuro.com");
             Close();
         }
     }

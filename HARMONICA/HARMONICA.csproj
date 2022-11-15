@@ -90,6 +90,9 @@
     <Compile Include="SimpleMixer.cs" />
     <Compile Include="SoftCl.cs" />
     <Compile Include="TembroClass.cs" />
+    <Compile Include="WinKey.xaml.cs">
+      <DependentUpon>WinKey.xaml</DependentUpon>
+    </Compile>
     <Page Include="ActivationForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -127,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Repeat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinKey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
